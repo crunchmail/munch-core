@@ -1,0 +1,107 @@
+from .base import *
+
+##########
+# Django #
+##########
+INSTALLED_APPS = []
+SECRET_KEY = 'CHANGEME'
+ALLOWED_HOSTS = ['munch.example.com']
+BROKER_URL = 'amqp://munch.example.com:15642'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'munch',
+        'USER': 'munch',
+        'PASSWORD': '',
+        'HOST': 'munch.example.com',
+        'PORT': '5432',
+    }
+}
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://munch.example.com:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+###########
+# Logging #
+###########
+# Some settings are Sentry specific
+# Do not forget to add Raven in INSTALLED_APPS
+LOGGING['root'] = {
+    'level': 'WARNING',
+    'handlers': ['sentry'],
+}
+LOGGING['disable_existing_loggers'] = True
+LOGGING['handlers']['sentry'] = {
+    'level': 'ERROR',
+    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+}
+LOGGING['loggers']['raven'] = {
+    'level': 'DEBUG',
+    'handlers': ['console'],
+    'propagate': False,
+}
+LOGGING['loggers']['sentry.errors'] = {
+    'level': 'DEBUG',
+    'handlers': ['console'],
+    'propagate': False,
+}
+
+LOGGING['loggers']['munch']['handlers'] = ['console', 'sentry']
+LOGGING['loggers']['slimta']['handlers'] = ['console', 'sentry']
+
+RAVEN_CONFIG = {
+    'dsn': 'munch.example.com',
+}
+
+##########
+# Global #
+##########
+MASS_SENDER_DOMAIN = 'munch.example.com'
+APPLICATION_URL = 'http://munch.example.com'
+
+###########
+# Domains #
+###########
+DOMAINS['SPF_INCLUDE'] = 'munch.example.com'
+DOMAINS['DKIM_KEY_ID'] = 'munch'
+DOMAINS['DKIM_KEY_CONTENT'] = 'CHANGEME'
+
+#################
+# Transactional #
+#################
+TRANSACTIONAL['SMTP_BIND_PORT'] = 1025
+TRANSACTIONAL['SMTP_BIND_HOST'] = '127.0.0.1'
+TRANSACTIONAL['EDGE_EHLO_AS'] = 'munch.example.com'
+TRANSACTIONAL['RETURNPATH_DOMAIN'] = 'munch.example.com'
+TRANSACTIONAL['SMTP_DSN_ADDRESS'] = 'CHANGEME <foo@munch.example.com>'
+TRANSACTIONAL['SMTP_SMARTHOST_TLS'] = {'keyfile': None, 'certfile': None}
+
+#########
+# Users #
+#########
+USERS['ORGANIZATION_APP_DOMAIN_CNAME'] = 'munch.example.com'
+
+################
+# Upload store #
+################
+UPLOAD_STORE['URL'] = 'http://munch.example.com'
+UPLOAD_STORE['BACKEND'] = (
+    'munch.apps.upload_store.backends.LocalFileSystemStorage')
+
+#########
+# Spamd #
+#########
+SPAMD_PORT = 1783
+SPAMD_HOST = 'localhost'
+
+#########
+# Clamd #
+#########
+CLAMD_PORT = 49227
+CLAMD_HOST = 'localhost'

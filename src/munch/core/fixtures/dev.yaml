@@ -1,0 +1,3 @@
+- model: core.category
+  pk: 1
+  fields: {name: Test Category, author: 1}

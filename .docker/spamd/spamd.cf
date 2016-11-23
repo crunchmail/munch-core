@@ -1,0 +1,15 @@
+add_header all Status _YESNO_, score=_SCORE()_ required=_REQD_ tests=[_TESTSSCORES(, )_] autolearn=_AUTOLEARN_
+add_header all Report _REPORT_
+
+skip_rbl_checks         1
+use_razor2              0
+use_pyzor               0
+
+use_bayes 0
+use_bayes_rules 0
+bayes_auto_learn 0
+
+score URIBL_BLOCKED 0
+score NO_RECEIVED 0
+score NO_RELAYS 0
+score RCVD_REMOVED 0

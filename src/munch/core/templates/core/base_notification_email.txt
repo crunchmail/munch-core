@@ -1,0 +1,6 @@
+{% load i18n %}{% load settings_value %}{% settings_value 'PRODUCT_NAME' as product_name %}
+{% block content %}{% endblock %}
+
+--
+{% with message.author.organization.name as org_name %}{% blocktrans %}You received this automated notification because you are the contact for the organization {{ org_name }}.{% endblocktrans %}{% endwith %}
+{% blocktrans %}You can manage your notification settings or change the notification address in your organization settings on {{ product_name }}.{% endblocktrans %}

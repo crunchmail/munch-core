@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Abuse report' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Abuse report' %}{% endblock %}
+
+{% block content %}
+{% if is_test_mail %}
+    {% include 'core/test_email_alert.html' %}
+{% endif %}
+<div class="text-center">
+    <p>
+        {% trans 'Your report has been submitted, our team will quickly take appropriate actions.' %}
+    </p>
+
+    <p>
+        {% trans 'You have also been <strong>automatically unsubscribed</strong> from any further communications from this particular sender.' %}
+    </p>
+</div>
+{% endblock %}

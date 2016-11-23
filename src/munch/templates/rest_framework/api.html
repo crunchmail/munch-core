@@ -1,0 +1,15 @@
+{% extends "rest_framework/base.html" %}
+{% load staticfiles %}
+{% load settings_value %}
+
+{% block title %}{% settings_value 'PRODUCT_NAME' %} API{% endblock %}
+
+{% block bootstrap_theme %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+{% endblock %}
+
+{% block bootstrap_navbar_variant %}{% endblock %}
+
+{% block branding %}
+    <a class='navbar-brand' rel="nofollow" href='/{{ request.version }}/'>{% settings_value 'PRODUCT_NAME' %} API {{ request.version }}</a>
+{% endblock %}

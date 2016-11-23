@@ -1,0 +1,75 @@
+Received: from mta-s1.node.ovh.oasis (LHLO smtpout.example.com) (1.2.3.4)
+ by zbx-s1.example.com with LMTP; Fri, 3 Apr 2015 17:18:06 +0200 (CEST)
+Received: by smtpout.example.com (Postfix)
+	id E0D791030FB; Fri,  3 Apr 2015 17:18:58 +0200 (CEST)
+Date: Fri,  3 Apr 2015 17:18:58 +0200 (CEST)
+From: MAILER-DAEMON@smtpout.example.com (Mail Delivery System)
+Subject: Undelivered Mail Returned to Sender
+To: ||TO||
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="6E66A1030CB.1428074338/smtpout.example.com"
+Message-Id: <20150403151858.E0D791030FB@smtpout.example.com>
+
+This is a MIME-encapsulated message.
+
+--6E66A1030CB.1428074338/smtpout.example.com
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host smtpout.example.com.
+
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+
+For further assistance, please send mail to postmaster.
+
+If you do so, please include this problem report. You can
+delete your own text from the attached returned message.
+
+                   The mail system
+
+<tsrenuatesrnaiitsernauit@acme.example.com>: host smtpz4.acme.example.com[5.6.7.8]
+    said: 550 5.5.0 Adresse destinataire invalide. Invalid recipient.
+    LPN007_416 (in reply to RCPT TO command)
+
+--6E66A1030CB.1428074338/smtpout.example.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; smtpout.example.com
+X-Postfix-Queue-ID: 6E66A1030CB
+X-Postfix-Sender: rfc822; jdoe@example.com
+Arrival-Date: Fri,  3 Apr 2015 17:18:58 +0200 (CEST)
+
+Final-Recipient: rfc822; tsrenuatesrnaiitsernauit@acme.example.com
+Original-Recipient: rfc822;tsrenuatesrnaiitsernauit@acme.example.com
+Action: failed
+Status: 5.5.0
+Remote-MTA: dns; smtpz4.acme.example.com
+Diagnostic-Code: smtp; 550 5.5.0 Adresse destinataire invalide. Invalid
+    recipient. LPN007_416
+
+--6E66A1030CB.1428074338/smtpout.example.com
+Content-Description: Undelivered Message
+Content-Type: message/rfc822
+
+Return-Path: <||RETURNPATH||>
+Date: Fri, 3 Apr 2015 17:18:05 +0200 (CEST)
+From: John Doe <jdoe@example.com>
+To: tsrenuatesrnaiitsernauit@acme.example.com
+Message-ID: <683744505.3497806.1428074285305.JavaMail.zimbra@example.com>
+Subject:
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Thread-Topic:
+Thread-Index: ANS0SZZ5uoyE0IPaVekoB+1tB6mJgw==
+
+Test email
+
+--=20
+John Doe
+
+--6E66A1030CB.1428074338/smtpout.example.com--

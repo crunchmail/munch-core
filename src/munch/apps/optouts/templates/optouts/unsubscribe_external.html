@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Unsubscribe' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Unsubscribe' %}{% endblock %}
+
+{% block content %}
+{% if is_test_mail %}
+    {% include 'core/test_email_alert.html' %}
+{% endif %}
+<div class="text-center">
+    <p>
+        {% trans 'The sender of this email has indicated that you should get in touch with him if you wish to unsubscribe:' %}
+    </p>
+
+    <p class="framed">{{mail.message.author.organization.settings.external_optout_message}}</p>
+
+    <p>
+        {% trans 'However, if you believe the email you received is abusive, ' %}<br />
+        <a href="{{mail.abuse_url}}">{% trans 'please let us know' %}</a>
+    </p>
+</div>
+
+{% endblock %}

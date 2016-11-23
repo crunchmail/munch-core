@@ -1,0 +1,6 @@
+Bonjour.
+
+Vous avez demandé à inscrire votre adresse {{ contact.mail }}. Pour valider
+cette inscription, veuillez cliquer sur le lien ci-dessous :
+
+{{ confirmation_link }}

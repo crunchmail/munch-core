@@ -1,0 +1,18 @@
+# Files
+*.db
+*.pyc
+*.egg-info
+pytestdebug.log
+celerybeat.pid
+celerybeat-schedule*
+src/munch/settings/local.py
+src/munch/settings/local_test.py
+
+# Directories
+.cache
+.coverage
+htmlcov
+__pycache__
+src/munch/media/**
+docs/tmp.md
+docs/_build

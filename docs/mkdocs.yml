@@ -1,0 +1,35 @@
+site_name: Munch
+theme: simplex
+repo_url: https://github.com/crunchmail/munch
+site_url: https://github.com/crunchmail/munch
+dev_addr: 127.0.0.1:8002
+extra:
+  version: 'v1'
+
+pages:
+  - Home: 'index.md'
+  - Developer guide: 'dev.md'
+  - Install: 'install.md'
+  - Core:
+    - Settings: 'core/settings.md'
+    - Workers: 'core/workers.md'
+    - Deployment: 'core/deploy.md'
+  - REST:
+    - Overview: 'rest/index.md'
+    - Users:
+      - Users: rest/users/users.md
+      - Organizations: rest/users/organizations.md
+      - API applications: rest/users/api_applications.md
+      - SMTP applications: rest/users/smtp_applications.md
+    - Domains: rest/domains/index.md
+    - Campaigns:
+        - Overview: rest/campaigns/overview.md
+        - Categories: rest/campaigns/categories.md
+        - Messages: rest/campaigns/messages.md
+        - Attachments: rest/campaigns/attachments.md
+        - Recipients: rest/campaigns/recipients.md
+    - Transactional:
+        - Overview: rest/transactional/overview.md
+        - Categories: rest/transactional/categories.md
+        - Mails: rest/transactional/mails.md
+        - Batches: rest/transactional/batches.md

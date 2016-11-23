@@ -1,0 +1,25 @@
+{% extends 'saas/base.html' %}
+
+{% block pagetitle %}Confirmation{% endblock %}
+{% block title %}Confirmation{% endblock %}
+
+{% block content %}
+    {% if errors %}
+        <ul class="errorlist">
+        {% for field, error in errors.items %}
+            {% if field == '__all__' %}
+            {{ error }}
+            {% else %}
+            <li>{{ field }} : {{ error }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% else %}
+        {% if contact.status == 'pending' %}
+            <p>Votre inscription a été prise en compte et devrait être traitée
+            prochainement.</p>
+        {% elif contact.status == 'ok' %}
+            <p>Votre inscription est confirmée.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

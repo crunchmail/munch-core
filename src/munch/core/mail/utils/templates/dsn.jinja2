@@ -1,0 +1,43 @@
+Date: {{ date }}
+From: {{ from }}
+Subject: {{ subject }}
+To: {{ to }}
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status; boundary="{{ boundary }}/{{ reporting_mta|default('unknown', true) }}"
+Message-Id: {{ identifier }}
+
+This is a MIME-encapsulated message.
+
+--{{ boundary }}/{{ reporting_mta|default('unknown', true) }}
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+{{ dsn_body }}
+
+--{{ boundary }}/{{ reporting_mta|default('unknown', true) }}
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; {{ reporting_mta|default('unknown', true) }}
+{%- for k, v in report_headers.items() %}
+{{ k }}: {{ v }}
+{%- endfor %}
+Arrival-Date: {{ date }}
+
+Final-Recipient: rfc822; {{ original_recipient }}
+Original-Recipient: rfc822; {{ original_recipient }}
+Action: {{ action }}
+Status: {{ reply_status }}
+{% if remote_mta %}Remote-MTA: dns; {{ remote_mta }}{% endif %}
+Diagnostic-Code: smtp; {{ reply_code }} {{ reply_message }}
+
+--{{ boundary }}/{{ reporting_mta|default('unknown', true) }}
+Content-Description: {{ description }}
+Content-Type: message/rfc822
+{% for k, v in original_headers.items() %}
+{{ k }}: {{ v }}
+{%- endfor %}
+
+{{ original_body }}
+--{{ boundary }}/{{ reporting_mta|default('unknown', true) }}--

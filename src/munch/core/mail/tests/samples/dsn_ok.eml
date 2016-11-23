@@ -1,0 +1,73 @@
+Date: Mon,  1 Sep 2014 17:36:45 +0000 (UTC)
+From: MAILER-DAEMON@mo1.foo.example.com (Mail Delivery System)
+Subject: Successful Mail Delivery Report
+To: ||TO||
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+    boundary="8D75F2E2A76.1409593005/mo1.foo.example.com"
+Message-Id: <20140901173645.BC78F2E2A7A@mo1.foo.example.com>
+X-Zimbra-DL: projets@example.com
+
+This is a MIME-encapsulated message.
+
+--8D75F2E2A76.1409593005/mo1.foo.example.com
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host mo1.foo.example.com.
+
+Your message was successfully delivered to the destination(s)
+listed below. If the message was delivered to mailbox you will
+receive no further notifications. Otherwise you may still receive
+notifications of mail delivery errors from other systems.
+
+                   The mail system
+
+<other-john@other.example.com>: delivery via mx1.free.fr[212.27.48.7]:25: 250 OK
+
+--8D75F2E2A76.1409593005/mo1.foo.example.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; mo1.foo.example.com
+X-Postfix-Queue-ID: 8D75F2E2A76
+X-Postfix-Sender: rfc822; projets@example.com
+Arrival-Date: Mon,  1 Sep 2014 17:36:45 +0000 (UTC)
+
+Final-Recipient: rfc822; other-john@other.example.com
+Original-Recipient: rfc822;other-john@other.example.com
+Action: relayed
+Status: 2.0.0
+Remote-MTA: dns; mx1.free.fr
+Diagnostic-Code: smtp; 250 OK
+
+--8D75F2E2A76.1409593005/mo1.foo.example.com
+Content-Description: Message Headers
+Content-Type: text/rfc822-headers
+
+Return-Path: <||RETURNPATH||>
+Received: from foo-host (unknown [172.22.0.1])
+    by mo1.foo.example.com (Postfix) with ESMTP id 8D75F2E2A76;
+    Mon,  1 Sep 2014 17:36:45 +0000 (UTC)
+Received: from localhost.localdomain (unknown [172.17.0.172])
+    by foo-host (Postfix) with ESMTP id 63C96E0B08;
+    Mon,  1 Sep 2014 19:31:31 +0200 (CEST)
+Date: Mon, 01 Sep 2014 17:31:31 +0000
+From: projets@example.com
+To: other-john@other.example.com
+ johndoe@example.com,
+ janedoe@example.com
+Message-ID: <redmine.issue-1163.20140901173131.e3ef5bbf493d3939@example.com>
+References: <redmine.issue-1163.20140901173131@example.com>
+Subject: [Manada - Evolution #1163] (Nouveau) Changement de couleur de la
+ barre de navigation
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_5404ad735cc4c_5b73ff6ec6dc4c89883d";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Auto-Submitted: auto-generated
+List-Id: <projets.example.com>
+
+--8D75F2E2A76.1409593005/mo1.foo.example.com--

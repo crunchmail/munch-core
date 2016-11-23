@@ -1,0 +1,1 @@
+{% load i18n %}[{{ product_name }}] {% trans 'Optout for' %} {{ address }} ({{ origin }})

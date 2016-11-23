@@ -1,0 +1,6 @@
+- fields: {description: Double Opt-In, name: DoubleOptIn}
+  model: contacts.contactlistpolicy
+  pk: 1
+- fields: {description: Bounce Check, name: BounceCheck}
+  model: contacts.contactlistpolicy
+  pk: 2

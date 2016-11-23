@@ -1,0 +1,22 @@
+{% load static %}
+{% load settings_value %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block pagetitle %}{% settings_value 'PRODUCT_NAME' %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/kube.css' %}">
+    <link rel="stylesheet" href="{% static 'css/munch.css' %}">
+</head>
+<body>
+    <div id="content">
+        <div class="row centered">
+            <div class="col col-4">
+                <h2 class="text-center">{% block title %}{% endblock %}</h2>
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

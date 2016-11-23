@@ -1,0 +1,108 @@
+- model: users.organization
+  pk: 1
+  fields:
+    name: Example
+    contact_email: contact@example.com
+    can_external_optout: false
+    can_attach_files: false
+    creation_date: '2016-04-06 15:26:12.509728+00:00'
+    update_date: '2016-04-06 15:26:12.509728+00:00'
+- model: users.organizationsettings
+  pk: 1
+  fields:
+    organization: 1
+    nickname: ''
+    notify_message_status: true
+    notify_optouts: false
+    external_optout_message: ''
+- model: users.munchuser
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$24000$1RBM155yVidq$MdzSquOiJJ+QRtUEJMxa1vg7mGiHZpM7bhAPA3IEzGU=
+    last_login: '2016-04-06 15:26:12.509728+00:00'
+    creation_date: '2016-04-06 15:26:12.509728+00:00'
+    is_superuser: true
+    identifier: superadmin@example.com
+    first_name: John
+    last_name: Doe
+    organization: 1
+    is_active: true
+    is_admin: true
+    secret: key-181d89e7a0d2a3e62c88c4d7ee
+    groups: []
+    user_permissions: []
+- model: users.munchuser
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$24000$1RBM155yVidq$MdzSquOiJJ+QRtUEJMxa1vg7mGiHZpM7bhAPA3IEzGU=
+    last_login: '2016-04-06 15:26:12.509728+00:00'
+    creation_date: '2016-04-06 15:26:12.509728+00:00'
+    is_superuser: false
+    identifier: admin@example.com
+    first_name: Jane
+    last_name: Doe
+    organization: 1
+    is_active: true
+    is_admin: false
+    secret: key-181d89e7a0d2a3e62c88c4d7e2
+    groups:
+        - [administrators]
+    user_permissions: []
+- model: users.munchuser
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$24000$1yUJ7ea6QFoE$StUykZNGhM3jWInQOi/PyL8LOMi3Ykkqc+9AT8lhVyc=
+    last_login: null
+    creation_date: '2016-04-06 15:26:12.509728+00:00'
+    is_superuser: false
+    identifier: manager@example.com
+    first_name: Jill
+    last_name: Doe
+    organization: 1
+    is_active: true
+    is_admin: false
+    secret: key-riGftImOjwPe3wPBNntLj6hcZG
+    groups:
+        - [managers]
+    user_permissions: []
+- model: users.munchuser
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$24000$8XjqHC6Chuy1$4jXFh+/hLs6jVnCfU3AuQVOGK6cnvNQ3UuRMzctpc/4=
+    last_login: null
+    creation_date: '2016-04-06 15:26:12.509728+00:00'
+    is_superuser: false
+    identifier: user@example.com
+    first_name: Jack
+    last_name: Doe
+    organization: 1
+    is_active: true
+    is_admin: false
+    secret: pidncuIFBKKqIsyG8EcC4lYjfS
+    groups:
+        - [users]
+    user_permissions: []
+- model: users.munchuser
+  pk: 5
+  fields:
+    password: pbkdf2_sha256$24000$SqY9xntzOo8p$/LRcJvd7yJlyyVQieAfoA2R6gpXRw7yjzE7t3JRCO4Y=
+    last_login: null
+    creation_date: '2016-04-06 15:26:12.509728+00:00'
+    is_superuser: false
+    identifier: collaborator@example.com
+    first_name: James
+    last_name: Doe
+    organization: 1
+    is_active: true
+    is_admin: false
+    secret: dlnHBpCIqauW8TQc8OL6Iw42BuGIjl
+    groups:
+        - [collaborators]
+    user_permissions: []
+- model: users.smtpapplication
+  pk: 1
+  fields:
+    identifier: test
+    username: admin
+    secret: admin
+    author: 2

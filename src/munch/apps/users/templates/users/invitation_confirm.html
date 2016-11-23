@@ -1,0 +1,71 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Account Activation' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Account Activation' %}{% endblock %}
+
+{% block content %}
+{% settings_value 'PRODUCT_NAME' as product_name %}
+
+{% if validlink %}
+
+<form method="post" class="form">{% csrf_token %}
+    <fieldset>
+        <p class="text-center">{% trans "You have been invited to join an organization:" %} <strong>{{ form.user.organization.name }}</strong></p>
+        <p class="text-center">{% blocktrans %}Just fill in this form to activate your account on {{ product_name }}.{% endblocktrans %}</p>
+
+        {{ password_policy | safe }}
+
+        {% if form.first_name.errors %}
+        <div class="alert error">
+            {{ form.first_name.errors.as_text }}
+        </div>
+        {% endif %}
+        <div class="form-item">
+            <label>{% trans 'First Name:' %}</label>
+            {{ form.first_name }}
+        </div>
+
+        {% if form.last_name.errors %}
+        <div class="alert error">
+            {{ form.last_name.errors.as_text }}
+        </div>
+        {% endif %}
+        <div class="form-item">
+            <label>{% trans 'Last Name:' %}</label>
+            {{ form.last_name }}
+        </div>
+
+        {% if form.new_password1.errors %}
+        <div class="alert error">
+            {{ form.new_password1.errors }}
+        </div>
+        {% endif %}
+        <div class="form-item">
+            <label>{% trans 'New password:' %}</label>
+            {{ form.new_password1 }}
+        </div>
+
+        {% if form.new_password2.errors %}
+        <div class="alert error">
+            {{ form.new_password2.errors }}
+        </div>
+        {% endif %}
+        <div class="form-item">
+            <label>{% trans 'Confirm password:' %}</label>
+            {{ form.new_password2 }}
+        </div>
+
+        <div class="form-item end">
+            <button>{% trans 'Activate my account' %}</button>
+        </div>
+    </fieldset>
+</form>
+
+{% else %}
+
+<p>{% trans "This invitation link is invalid, possibly because it has already been used. Please contact your administrator." %}</p>
+
+{% endif %}
+{% endblock %}

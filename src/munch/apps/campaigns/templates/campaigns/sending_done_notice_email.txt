@@ -1,0 +1,17 @@
+{% extends 'core/base_notification_email.txt' %}
+{% load munchtags %}{% load i18n %}{% load humanizelib %}
+
+{% block content %}
+{% blocktrans %}All the emails for the message "{{ message }}" have been sent.{% endblocktrans %}
+
+{% trans 'Here are the final delivery statistics:' %}
+
+* {% trans 'Total emails:' %} {{ stats.count.total }}
+  * {% trans 'delivered:' %} {{ stats.last_status.delivered }} ({{ stats.last_status.delivered|divide:stats.count.total|percent }})
+  * {% trans 'bounced:' %} {{ stats.last_status.bounced }} ({{ stats.last_status.bounced|divide:stats.count.total|percent }})
+  * {% trans 'dropped:' %} {{ stats.last_status.dropped }} ({{ stats.last_status.dropped|divide:stats.count.total|percent }})
+  * {% trans 'ignored:' %} {{ stats.last_status.ignored }} ({{ stats.last_status.ignored|divide:stats.count.total|percent }})
+
+* {% trans 'Median delivery time:' %} {{ stats.timing.delivery_median|naturaldelta }}
+* {% trans 'Total delivery time:' %} {{ stats.timing.delivery_total|naturaldelta }}
+{% endblock %}

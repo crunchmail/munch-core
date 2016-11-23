@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}Your {{ product_name }} account is now active!{% endblocktrans %}
+
+{% trans 'To login, go to' %} {{ login_url }}
+{% trans "Your username, in case you've forgotten:" %} {{ user.get_username }}
+
+{% trans 'See you soon!' %}
+{% endautoescape %}

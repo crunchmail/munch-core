@@ -1,0 +1,48 @@
+version: '2'
+
+# Spamd won't work well with docker port forwards (no response content)
+# We use a separate network so we can access it directly
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 250.0.0.0/24
+          gateway: 250.0.0.254
+
+services:
+  postgres:
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: munch
+      POSTGRES_USER: munch
+      POSTGRES_PASSWORD: munch
+    ports:
+      - 127.0.0.1:15432:5432
+  redis:
+    image: redis:3
+    ports:
+      - 127.0.0.1:16379:6379
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: munch
+    ports:
+      - 127.0.0.1:5682:5672
+      - 127.0.0.1:15672:15672
+  smtpd:
+    build: .docker/smtpd
+    ports:
+      - 127.0.0.1:2525:25
+  spamd:
+    build: .docker/spamd
+    networks:
+      default:
+        ipv4_address: 250.0.0.250
+  clamd:
+    build: .docker/clamd
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 127.0.0.1:13310:3310

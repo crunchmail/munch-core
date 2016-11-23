@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Unsubscribe' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Unsubscribe' %}{% endblock %}
+
+{% block content %}
+{% if is_test_mail %}
+    {% include 'core/test_email_alert.html' %}
+{% endif %}
+<p class="text-center">
+  {% trans 'You have been successfully unsubscribed' %}
+</p>
+
+{% endblock %}

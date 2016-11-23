@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Unsubscribe' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Unsubscribe' %}{% endblock %}
+
+{% block content %}
+{% if is_test_mail %}
+    {% include 'core/test_email_alert.html' %}
+{% endif %}
+<form action="" method="post" class="form text-center">{% csrf_token %}
+   <fieldset>
+
+       <p>
+         {% trans 'Please confirm that you want to unsubscribe the following address:' %} <br /><strong><em>{{ mail.recipient }}</em></strong>
+       </p>
+
+       <div class="form-item end">
+            <button>{% trans 'Unsubscribe me' %}</button>
+        </div>
+
+   </fieldset>
+</form>
+{% endblock %}

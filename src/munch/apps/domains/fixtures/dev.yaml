@@ -1,0 +1,40 @@
+- model: domains.sendingdomain
+  pk: 1
+  fields:
+    name: example.com
+    creation_date: '2016-07-20 14:33:47+00:00'
+    update_date: '2016-07-20 14:33:53.882923+00:00'
+    organization: 1
+    dkim_status: ok
+    dkim_status_date: '2016-07-20 14:33:53.882912+00:00'
+    alt_organizations: []
+    app_domain: ''
+    app_domain_status: unknown
+    app_domain_status_date: '2016-07-20 14:33:53.882912+00:00'
+- model: domains.sendingdomain
+  pk: 2
+  fields:
+    name: bad.example.com
+    creation_date: '2016-07-20 14:33:47+00:00'
+    update_date: '2016-07-20 14:33:53.882923+00:00'
+    organization: 1
+    dkim_status: ko
+    dkim_status_date: '2016-07-20 14:33:53.882912+00:00'
+    alt_organizations: []
+    app_domain: ''
+    app_domain_status: unknown
+    app_domain_status_date: '2016-07-20 14:33:53.882912+00:00'
+# With custom app domain
+- model: domains.sendingdomain
+  pk: 3
+  fields:
+    name: munch.dev
+    creation_date: '2016-07-20 14:33:47+00:00'
+    update_date: '2016-07-20 14:33:53.882923+00:00'
+    organization: 1
+    dkim_status: ok
+    dkim_status_date: '2016-07-20 14:33:53.882912+00:00'
+    alt_organizations: []
+    app_domain: 'email.munch.dev'
+    app_domain_status: ok
+    app_domain_status_date: '2016-07-20 14:33:53.882912+00:00'

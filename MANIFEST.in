@@ -1,0 +1,6 @@
+include setup.py README.rst
+recursive-include src/munch *.txt
+recursive-include src/munch *.html
+recursive-include src/munch/assets *
+recursive-include src/munch/locale *
+global-exclude *~

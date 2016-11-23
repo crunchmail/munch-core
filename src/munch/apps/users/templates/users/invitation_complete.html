@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Account Activation' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Account Activation' %}{% endblock %}
+
+{% block content %}
+{% settings_value 'PRODUCT_NAME' as product_name %}
+<div class="text-center">
+    <p>{% trans "Your account has been activated successfully!" %}</p>
+
+    <p>{% trans 'You can go ahead and' %} <a href="{{ login_url }}">{% blocktrans %}login to {{ product_name }} API{% endblocktrans %}</a></p>
+</div>
+{% endblock %}

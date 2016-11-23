@@ -1,0 +1,14 @@
+- model: campaigns.mail
+  pk: 1
+  fields: {recipient: root@postfix.example.com, identifier: c-KbLIjSHYRXWEHX9jZaJpVw,
+    creation_date: '2016-06-13 08:43:22+00:00', message: 1, properties: '{}',
+    source_type: '', source_ref: '', curstatus: unknown, first_status_date: null,
+    latest_status_date: null, delivery_duration: '00:00:00', had_delay: false}
+- model: campaigns.message
+  pk: 1
+  fields: {identifier: LHCPgmWuTKyAKWnvSKIlNQ, name: Test Message, sender_email: root@postfix.example.com,
+    sender_name: Root, subject: Test Subject, html: <html>Test Html UNSUBSCRIBE_URL</html>, status: message_ok,
+    author: 2, creation_date: '2016-06-13 08:42:30.930758+00:00', send_date: null,
+    completion_date: null, category: 1, properties: '{}', external_optout: false,
+    detach_images: false, track_open: false, track_clicks: false, spam_score: null,
+    spam_details: null, is_spam: false, spam_check_error: '', msg_issue: '', msg_links: '{}'}

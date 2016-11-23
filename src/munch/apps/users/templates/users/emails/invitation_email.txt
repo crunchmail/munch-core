@@ -1,0 +1,7 @@
+{% load i18n %}{% autoescape off %}
+{% blocktrans %}You have been invited to join the organization {{ user.organization.name }} on {{ product_name }}.{% endblocktrans %}
+
+{% trans 'To create your account, please go to the following page and choose a new password:' %}
+
+{{ protocol }}://{{ domain }}{% url 'invitation_confirm' uidb64=uid token=token %}
+{% endautoescape %}

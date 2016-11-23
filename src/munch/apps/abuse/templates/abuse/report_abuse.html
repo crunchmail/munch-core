@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% load settings_value %}
+
+{% block pagetitle %}{% trans 'Abuse report' %} - {% settings_value 'PRODUCT_NAME' %}{% endblock %}
+{% block title %}{% trans 'Abuse report' %}{% endblock %}
+
+{% block content %}
+{% if is_test_mail %}
+    {% include 'core/test_email_alert.html' %}
+{% endif %}
+<p class="text-center">
+    {% trans 'Please use the form below to report an abusive email sent from our platform.' %}<br />
+</p>
+
+<form action="" method="post" class="form">{% csrf_token %}
+
+    <fieldset>
+        <p class="text-center">
+            {% trans 'The contact name and email fields are optional, but are very useful in helping us investigate an abusive sender.' %}
+        </p>
+        {% for field in form %}
+        <div class="form-item">
+            <label>{% if not field.is_hidden %}{{ field.label }}{% endif %}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <div class="form-item end">
+            <button>{% trans 'Submit' %}</button>
+        </div>
+    </fieldset>
+
+</form>
+{% endblock %}

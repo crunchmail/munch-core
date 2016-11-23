@@ -1,0 +1,4 @@
+Bonjour,
+
+Vous avez demandé à inscrire votre adresse {{ contact.mail }}. Ce mail vous
+confirme la prise en compte de cette inscription.

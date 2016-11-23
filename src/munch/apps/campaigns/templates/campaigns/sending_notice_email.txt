@@ -1,0 +1,21 @@
+{% extends 'core/base_notification_email.txt' %}
+{% load munchtags %}{% load i18n %}{% load settings_value %}{% settings_value 'PRODUCT_NAME' as product_name %}
+
+{% block content %}
+{% blocktrans %}Sending started for message "{{ message }}".{% endblocktrans %}
+
+{% with willsend=message.willsend_addresses.count willnotsend=message.willnotsend_addresses.count %}
+{% if willsend == 0 %}- {% trans 'no recipients will receive this message (they have all been ignored). Possible reasons:' %}
+  - {% trans 'they had already unsubscribed from your messages' %}
+  - {% trans 'no email server could be found for their address' %}{% else %}
+- {{ willsend }} {% trans 'recipient(s) will receive this message' %}
+{% if willnotsend == 0 %}- {% trans 'no recipients have been ignored' %}
+{% else %}- {{ willnotsend }} {% trans 'recipient(s) have been ignored. Possible reasons:' %}
+  - {% trans 'they had already unsubscribed from your messages' %}
+  - {% trans 'no email server could be found for their address' %}{% endif %}{% endif %}
+{% endwith %}
+
+{% trans 'You will receive a notification once this message has finished sending.' %}
+{% trans 'Please note that temporary delivery errors to some recipients might delay this notification significantly.' %}
+{% blocktrans %}In the meantime you can check the message delivery status via {{ product_name }} API.{% endblocktrans %}
+{% endblock %}

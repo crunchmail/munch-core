@@ -1,0 +1,10 @@
+{% extends 'core/base_notification_email.txt' %}
+{% load i18n %}
+
+{% block content %}
+{% blocktrans %}The recipient {{ to }} has unsubscribed following the reception of message:{% endblocktrans %}
+
+    "{{ message }}"
+
+{% trans 'Future messages sent to this address from your account will not be delivered.' %}
+{% endblock %}

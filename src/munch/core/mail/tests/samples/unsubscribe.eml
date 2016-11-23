@@ -1,0 +1,12 @@
+From foo@localhost Fri Sep 12 16:52:10 2014
+Return-path: <||RETURNPATH||>
+Envelope-to: ||TO||
+Delivery-date: Fri, 12 Sep 2014 16:52:10 +0200
+Date: Fri, 12 Sep 2014 16:52:10 +0200
+To: ||TO||
+User-Agent: Heirloom mailx 12.5 6/20/10
+Content-Type: text/plain; charset=us-ascii
+From: Foo Delalande <foo@localhost>
+Status: R
+
+foo
