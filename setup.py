@@ -1,21 +1,18 @@
+#!/usr/bin/env python3
 import os
-import re
 
 from setuptools import setup
 from setuptools import find_packages
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
-    README = readme.read()
+base_dir = os.path.dirname(__file__)
 
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+about = {}
+with open(os.path.join(base_dir, "src", "munch", "__about__.py")) as f:
+    exec(f.read(), about)
 
-with open('src/munch/__init__.py', 'r') as fd:
-    version = re.search(
-        r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
-        fd.read(), re.MULTILINE).group(1)
 
-if not version:
-    raise RuntimeError('Cannot find version information')
+with open(os.path.join(base_dir, "README.rst")) as f:
+    long_description = f.read()
 
 dependency_links = []
 
@@ -58,16 +55,16 @@ requires = [
 
 
 setup(
-    name='munch',
-    version=version,
+    name=about["__title__"],
+    version=about["__version__"],
     package_dir={'': 'src'},
     packages=find_packages('src'),
-    long_description=README,
+    long_description=long_description,
     include_package_data=True,
-    description='Munch core',
-    author='Crunchmail',
-    author_email='dev@crunchmail.com',
-    url='https://git.owk.cc/crunchmail/munch',
+    description=about["__summary__"],
+    author=about["__author__"],
+    author_email=about["__email__"],
+    url=about["__uri__"],
     install_requires=requires,
     dependency_links=dependency_links,
     entry_points={

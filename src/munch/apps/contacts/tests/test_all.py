@@ -149,7 +149,7 @@ class ContactQueuesTestCase(TestCase):
         contact.save()
         contact.apply_policies()
         self.assertEqual(1, len(mail.outbox))
-        confirmation_msg = mail.outbox.pop().message().get_payload()
+        confirmation_msg = mail.outbox.pop().body
         url = URL_REGEX.search(confirmation_msg).group().replace(
             settings.APPLICATION_URL, '')
         response = self.client.get(url)
@@ -217,8 +217,7 @@ class ContactQueuesTestCase(TestCase):
             contact_queue=q, address='nope2@nope', subscription_ip='127.0.0.1')
         contact.save()
         contact.apply_policies()
-
-        confirmation_msg = mail.outbox.pop().message().get_payload()
+        confirmation_msg = mail.outbox.pop().body
         url = URL_REGEX.search(confirmation_msg).group().replace(
             settings.APPLICATION_URL, '')
         self.client.get(url)
@@ -593,7 +592,7 @@ class ContactListTestCase(TestCase):
         contact.save()
         contact.apply_policies()
         self.assertEqual(1, len(mail.outbox))
-        confirmation_msg = mail.outbox.pop().message().get_payload()
+        confirmation_msg = mail.outbox.pop().body
         url = URL_REGEX.search(confirmation_msg).group().replace(
             settings.APPLICATION_URL, '')
         response = self.client.get(url)
@@ -670,7 +669,7 @@ class ContactListTestCase(TestCase):
         contact.save()
         contact.apply_policies()
 
-        confirmation_msg = mail.outbox.pop().message().get_payload()
+        confirmation_msg = mail.outbox.pop().body
         url = URL_REGEX.search(confirmation_msg).group().replace(
             settings.APPLICATION_URL, '')
         self.client.get(url)

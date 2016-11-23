@@ -129,7 +129,6 @@ def subscription(request, uuid):
 def confirmation(request, uuid):
     expiration = timezone.now() -\
         settings.CONTACTS['EXPIRATIONS']['contact_queues:double-opt-in']
-
     filters = {
         'uuid': uuid,
         'update_date__gte': expiration,
