@@ -36,6 +36,53 @@ To run linter (based on `setup.cfg`):
 
     flake8
 
+# Run
+
+Munch is composed of multiple components under `munch` command line.
+
+- **web app**: `munch django runserver`
+- **worker**: `munch run worker --worker-type=all
+- **backmuncher** (incoming dsn): `munch run backmuncher`
+- **cron** (scheduled tasks): `munch run cron`
+
+```
+    $ munch --help
+    Usage: munch [OPTIONS] COMMAND [ARGS]...
+
+      Munch is an emailing platform.
+
+      Default settings module is `munch.settings` but it can be overridden with
+      `DJANGO_CONFIG_MODULE` or with `--config` parameter.
+
+    Options:
+      --config PATH  Path to settings module.
+      --version      Show the version and exit.
+      --help         Show this message and exit.
+
+    Commands:
+      django   Execute Django subcommands.
+      help     Show this message and exit.
+      migrate  Run migrations (like `munch django migrate`).
+      run      Run a service.
+      shell    Run a Python interactive interpreter.
+```
+```
+    $ munch run --help
+    Usage: munch run [OPTIONS] COMMAND [ARGS]...
+
+      Run a service.
+
+    Options:
+      --help  Show this message and exit.
+
+    Commands:
+      backmuncher  Run smtp that handle feedback loops,...
+      cron         Run periodic task dispatcher.
+      smtp         Run smtp smarthost for transactional service.
+      worker       Run background worker instance.
+```
+
+
 ## Snippets
 
 ### Sending e-mails
