@@ -55,7 +55,7 @@ Update a category.
 ## Delete a category
 
 > You can only delete a category that doesn't have any
-> [message](/campaigns/messages).
+> [message](messages.md).
 
 ## List opt-outs (todo)
 ## Retrieve stats (todo)

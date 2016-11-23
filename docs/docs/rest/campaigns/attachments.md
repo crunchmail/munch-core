@@ -50,7 +50,7 @@ This request must be done in HTML form (not JSON body).
 
 `GET /attachments`
 
-Return a list of [attachments](#create-an-attachment).
+Return a list of [attachments](#add-an-attachment).
 
 ## Modify and attachment
 

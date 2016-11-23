@@ -1,6 +1,6 @@
 # Recipients
 
-Each recipients must be attached to a [message](/campaigns/messages), have an address and will have a status tracking.
+Each recipients must be attached to a [message](messages.md), have an address and will have a status tracking.
 
 ## Create a recipient
 

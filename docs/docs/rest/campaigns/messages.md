@@ -133,14 +133,14 @@ Get a summary of your message.
       "plaintext": "[truncated]"
     }
 
-| Name                | Type    | Description                                           |
-|---------------------|---------|-------------------------------------------------------|
-| recipients          | array   | List of accepted [recipients](/campaigns/recipients)  |
-| excluded_recipients | array   | List of refused [recipients](/campaigns/recipients) (for example, opt-outs)    |
-| spam_score          | integer | Spam score                                            |
-| is_spam             | boolean | Is considered as spam?                                |
-| html                | string  | HTML rendered (same as [html preview](#html-preview)) |                                  |
-| text                | string  | Text rendered (same as [text preview](#text-preview)) |                             |
+| Name                | Type    | Description                                                            |
+|---------------------|---------|------------------------------------------------------------------------|
+| recipients          | array   | List of accepted [recipients](recipients.md)                           |
+| excluded_recipients | array   | List of refused [recipients](recipients.md) (for example, opt-outs)    |
+| spam_score          | integer | Spam score                                                             |
+| is_spam             | boolean | Is considered as spam?                                                 |
+| html                | string  | HTML rendered (same as [html preview](#retrieve-html-preview))         |
+| text                | string  | Text rendered (same as [text preview](#retrieve-text-preview))         |
 
 ## Retrieve text preview
 
