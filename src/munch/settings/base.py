@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'munch.apps.tracking',
     'munch.apps.transactional',
     'munch.apps.upload_store',
+    # Mail backend
+    'munch_mailsend',
 ]
 MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -185,7 +187,9 @@ CELERYBEAT_SCHEDULE = {
 ##########
 # Global #
 ##########
+# Product name appear in email templates and optouts pages
 PRODUCT_NAME = 'Munch'
+# Default return-path to use (must be backmuncher MX)
 RETURNPATH_DOMAIN = 'munch.example.com'
 # URL base used for links generation (optouts, tracking, subscriptions, ...)
 APPLICATION_URL = 'http://localhost:8000'
@@ -209,8 +213,8 @@ PASSWORD_RESET_TIMEOUT_DAYS = 1
 INVITATION_TIMEOUT_DAYS = 15
 ACCOUNT_ACTIVATION_TIMEOUT_DAYS = 30
 
-EMAIL_BACKEND = 'munch.core.mail.backend.DummyBackend'
-MASS_EMAIL_BACKEND = 'munch.core.mail.backend.DummyBackend'
+EMAIL_BACKEND = 'munch_mailsend.backend.Backend'
+MASS_EMAIL_BACKEND = 'munch_mailsend.backend.Backend'
 # May be set True for debug/testing
 BYPASS_DNS_CHECKS = False
 
@@ -229,6 +233,7 @@ STATSD_MAXUDPSIZE = 512
 # Custom headers #
 ##################
 X_USER_ID_HEADER = 'X-Munch-User-Id'
+X_POOL_HEADER = 'X-Munch-Pool'
 X_MESSAGE_ID_HEADER = 'X-Munch-Message-Id'
 X_HTTP_DSN_RETURN_PATH_HEADER = 'X-Munch-HTTP-Return-Path'
 X_SMTP_DSN_RETURN_PATH_HEADER = 'X-Munch-SMTP-Return-Path'
@@ -434,6 +439,93 @@ CONTACTS = {
         'contact_lists:bounce-check': timedelta(hours=1),
         'contact_lists:consumed_lifetime': timedelta(days=7),
         'contact_lists:failed_lifetime': timedelta(days=7)}
+}
+
+############
+# Mailsend #
+############
+MAILSEND = {
+    # All Internal mailsend emails will be send to a blackhole
+    'SANDBOX': True,
+    'RELAY_TIMEOUTS': {
+        'connect_timeout': 30.0, 'command_timeout': 30.0,
+        'data_timeout': None, 'idle_timeout': None},
+    # Timeout for MailStatus cache
+    'MAILSTATUS_CACHE_TIMEOUT': 60 * 60 * 24 * 15,
+    'X_POOL_HEADER': X_POOL_HEADER,
+    'X_MESSAGE_ID_HEADER': X_MESSAGE_ID_HEADER,
+    # Letting to None will make it use the host FQDN
+    'SMTP_WORKER_EHLO_AS': 'munch.example.com',
+    # Letting to None fallback to system routing
+    # example: '1.2.3.4'
+    'SMTP_WORKER_SRC_ADDR': None,
+    # Backoff time is exponentially growing up to max_retry_interval and then
+    # staying there on each retry till we reach time_before_drop.
+    'RETRY_POLICY': {
+        # Minimun time between two retries
+        'min_retry_interval': 600,
+        # Maximum time between two retries
+        'max_retry_interval': 3600,
+        # Time before we drop the mail and notify sender
+        'time_before_drop': 2 * 24 * 3600},
+    # Set this to an encoder fromhttps://docs.python.org/3.4/library/email.encoders.html#module-email.encoders  # noqa
+    # to convert utf-8 emails to ascii
+    'BINARY_ENCODER': None,
+    'BLACKLISTED_HEADERS': [
+        X_POOL_HEADER,
+        X_HTTP_DSN_RETURN_PATH_HEADER,
+        X_SMTP_DSN_RETURN_PATH_HEADER],
+    'RELAY_POLICIES': [
+        'munch.apps.transactional.policies.relay.headers.RewriteReturnPath',
+        'munch_mailsend.policies.relay.headers.StripBlacklisted',
+        # 'munch_mailsend.policies.relay.dkim.Sign'],
+    ],
+    'WORKER_POLICIES': [
+        # 'munch_mailsend.policies.mx.pool.Policy',
+        # 'munch_mailsend.policies.mx.rate_limit.Policy',
+        # 'munch_mailsend.policies.mx.greylist.Policy',
+        # 'munch_mailsend.policies.mx.warm_up.Policy',
+    ],
+    'WORKER_POLICIES_SETTINGS': {
+        'rate_limit': {
+            'domains': [
+                (r'.*', 2)],
+            'max_queued': 60 * 15},
+        'warm_up': {
+            'prioritize': 'equal',
+            'domain_warm_up': {
+                'matrix': [50, 100, 300, 500, 1000],
+                'goal': 500,
+                'max_tolerance': 10,
+                'step_tolerance': 10,
+                'days_watched': 10,
+            },
+            'ip_warm_up': {
+                'matrix': [50, 100, 300, 500, 1000],
+                'goal': 500,
+                'max_tolerance': 10,
+                'step_tolerance': 10,
+                'enabled': False,
+                'days_watched': 10,
+            }
+        },
+        'pool': {'pools': ['default']},
+        'greylist': {'min_retry': 60 * 5},
+    },
+    'WARM_UP_DOMAINS': {},
+    'DKIM_PRIVATE_KEY': None,
+    'DKIM_SELECTOR': None,
+    'TLS': {'keyfile': None, 'certfile': None},
+    'TASKS_SETTINGS': {
+        'send_email': {
+            'default_retry_delay': 180,
+            'max_retries': (2 * 7 * 24 * 60 * 60) / 180
+        },
+        'route_envelope': {
+            'default_retry_delay': 180,
+            'max_retries': (2 * 7 * 24 * 60 * 60) / 180
+        }
+    }
 }
 
 #######
