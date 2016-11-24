@@ -1,5 +1,36 @@
 # Settings
 
+Here you'll find important settings but not all settings.
+You can take a look at [production.dist](https://github.com/crunchmail/munch-core/blob/master/src/munch/settings/production.dist).
+
+## Global
+
+```python
+# RabbitMQ
+BROKER_URL = 'amqp://guest:guest@127.0.0.1:5682/munch'
+# PostgreSQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'munch',
+        'USER': 'munch',
+        'PASSWORD': 'munch',
+        'HOST': '127.0.0.1',
+        'PORT': '15432',
+    }
+}
+# Redis
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:16379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+```
+
 ## Transactional (Edge)
 
 ### SSL
@@ -40,7 +71,7 @@ You can tune where do the smtp smarthost daemon binds its socket:
 In case HTTP webhook cannot be reached, you can tune how many times you want
 them to be retried and the interval between two attempts.
 
-    STATUS_WEBHOOK_MAX_ATTEMPTS=12 # None for infinite attempts
+    STATUS_WEBHOOK_MAX_ATTEMPTS=12  # None for infinite attempts
     STATUS_WEBHOOK_RETRY_INTERVAL=180
 
 
@@ -50,14 +81,7 @@ This configure part will be moved in *Mailsend* documentation later.
 
 *EHLO/HELO* host and output IP are by default using FQDN and system routing, but they can be overrided:
 
-    MAILSEND['SMTP_WORKER_EHLO_AS'] = 'tartempion.example.com'
+    MAILSEND['SMTP_WORKER_EHLO_AS'] = 'munch.example.com'
     MAILSEND['SMTP_WORKER_SRC_ADDR'] = '1.2.3.4'
 
 (make sure the host actually has the IP and that hostname points to it).
-
-To use Vagrant postfix vm you have to re-route `postfix.example.com` to it.
-
-    MAILSEND['SMTP_WORKER_FORCE_MX'] = [
-        {
-            'domain': 'postfix.example.com',
-            'destination': '127.0.0.1', 'port': 15625}]

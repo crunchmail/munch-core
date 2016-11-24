@@ -14,6 +14,8 @@ pages:
     - Settings: 'core/settings.md'
     - Workers: 'core/workers.md'
     - Deployment: 'core/deploy.md'
+    - Storage backends: 'core/storage_backends.md'
+    - Email backends: 'core/email_backends.md'
   - REST:
     - Overview: 'rest/index.md'
     - Users:
