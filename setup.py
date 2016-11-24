@@ -51,6 +51,8 @@ requires = [
     'django-redis==4.4.4',
     # Fixtures
     'PyYAML==3.11',
+    # Email backend
+    'munch-mailsend==0.1.0',
 ]
 
 
