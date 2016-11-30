@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://github.com/crunchmail/munch/rest/campaigns/messages/">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>Messages - Munch</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
+        <link href="../../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../../..">Munch</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../../dev/">Developer guide</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../../install/">Install</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Core <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../../core/settings/">Settings</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/workers/">Workers</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/deploy/">Deployment</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/storage_backends/">Storage backends</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/email_backends/">Email backends</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">REST <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../">Overview</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Users</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../users/users/">Users</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../users/organizations/">Organizations</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../users/api_applications/">API applications</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../users/smtp_applications/">SMTP applications</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+<li >
+    <a href="../../domains/">Domains</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Campaigns</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../categories/">Categories</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Messages</a>
+</li>
+
+        
+            
+<li >
+    <a href="../attachments/">Attachments</a>
+</li>
+
+        
+            
+<li >
+    <a href="../recipients/">Recipients</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Transactional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../transactional/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../transactional/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../transactional/mails/">Mails</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../transactional/batches/">Batches</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../categories/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../attachments/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/crunchmail/munch">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#messages">Messages</a></li>
+        
+            <li><a href="#create-a-message">Create a message</a></li>
+        
+            <li><a href="#list-messages">List messages</a></li>
+        
+            <li><a href="#modify-a-message">Modify a message</a></li>
+        
+            <li><a href="#send-a-message">Send a message</a></li>
+        
+            <li><a href="#delete-a-message">Delete a message</a></li>
+        
+            <li><a href="#retrieve-message-preview">Retrieve message preview</a></li>
+        
+            <li><a href="#retrieve-text-preview">Retrieve text preview</a></li>
+        
+            <li><a href="#retrieve-html-preview">Retrieve HTML preview</a></li>
+        
+            <li><a href="#retrieve-recipients">Retrieve recipients</a></li>
+        
+            <li><a href="#retrieve-bounces">Retrieve bounces</a></li>
+        
+            <li><a href="#retrieve-opt-outs">Retrieve opt-outs</a></li>
+        
+            <li><a href="#retrieve-stats">Retrieve stats</a></li>
+        
+            <li><a href="#retrieve-attachments">Retrieve attachments</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="messages">Messages</h1>
+<p>Message are campaign main component.</p>
+<h2 id="create-a-message">Create a message</h2>
+<p><code>POST /messages</code></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Message name</td>
+</tr>
+<tr>
+<td>sender_email</td>
+<td>string</td>
+<td>Sender email (must be a valid <a href="../todo">sending domain</a>)</td>
+</tr>
+<tr>
+<td>sender_name</td>
+<td>string</td>
+<td>Sender name</td>
+</tr>
+<tr>
+<td>subject</td>
+<td>string</td>
+<td>Message subject</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>HTML</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Message category URL</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>object</td>
+<td>Message properties</td>
+</tr>
+<tr>
+<td>track_open</td>
+<td>boolean</td>
+<td>Enable opens tracking</td>
+</tr>
+<tr>
+<td>track_clicks</td>
+<td>boolean</td>
+<td>Enable clicks tracking</td>
+</tr>
+<tr>
+<td>external_optout</td>
+<td>boolean</td>
+<td>Enable external opt-outs</td>
+</tr>
+<tr>
+<td>detach_images</td>
+<td>boolean</td>
+<td>Detach message images</td>
+</tr>
+</tbody>
+</table>
+<h4 id="success-response">Success response</h4>
+<p><code>HTTP 201 Created</code></p>
+<pre><code>{
+  "url": "/messages/1/",
+  "id": 2,
+  "name": "test",
+  "sender_email": "admin@example.com",
+  "sender_name": "Jan Doe",
+  "subject": "My Subject",
+  "html": "&lt;body&gt;Hello! &lt;a href=\"UNSUBSCRIBE_URL\"&gt;Unsubscribe here!&lt;/a&gt;&lt;/body&gt;",
+  "status": "message_ok",
+  "category": "/categories/1/",
+  "recipient_count": 0,
+  "properties": {},
+  "creation_date": "2016-11-18T14:39:56.019101Z",
+  "send_date": null,
+  "completion_date": null,
+  "track_open": false,
+  "track_clicks": false,
+  "external_optout": false,
+  "detach_images": false,
+  "spam_score": null,
+  "spam_details": null,
+  "is_spam": false,
+  "msg_issue": "",
+  "_links": {
+    "preview_send": {
+      "href": "/messages/1/preview_send/"
+    },
+    "preview": {
+      "href": "/messages/1/preview/"
+    },
+    "preview.html": {
+      "href": "/messages/1/preview.html"
+    },
+    "preview.txt": {
+      "href": "/messages/1/preview.txt"
+    },
+    "recipients": {
+      "href": "/messages/1/recipients/"
+    },
+    "bounces": {
+      "href": "/messages/1/bounces/"
+    },
+    "opt_outs": {
+      "href": "/messages/1/opt_outs/"
+    },
+    "stats": {
+      "href": "/messages/1/stats/"
+    },
+    "attachments": {
+      "href": "/messages/1/attachments/"
+    },
+    "archive_url": {
+      "href": "/archive/twzaPZ5lTdaygV9GVZYpEg/"
+    }
+  }
+}
+</code></pre>
+<p>In order to view your message only you can use <code>archive_url</code> URL.</p>
+<h2 id="list-messages">List messages</h2>
+<p>List all messages you have access.</p>
+<p><code>GET /messages</code></p>
+<h3 id="success-response_1">Success response</h3>
+<p>A list of <a href="#create-a-message">messages</a>.</p>
+<h2 id="modify-a-message">Modify a message</h2>
+<p>Update a message object.</p>
+<p><code>PUT /messages/:id</code></p>
+<h2 id="send-a-message">Send a message</h2>
+<p>Every message with <code>message_ok</code> status can be updated to <code>sending</code> in order to trigger delivery.</p>
+<p><code>PUT /messages/:id</code></p>
+<h2 id="delete-a-message">Delete a message</h2>
+<blockquote>
+<p>You can only delete a message that doesn't have a final status.</p>
+<ul>
+<li><strong>Non-final statuses</strong>: <code>new</code>, <code>message_ok</code>, <code>messages_issues</code></li>
+<li><strong>Final statuses</strong>: <code>sending</code>, <code>sent</code>.</li>
+</ul>
+</blockquote>
+<p><code>DELETE /messages/:id</code></p>
+<h2 id="retrieve-message-preview">Retrieve message preview</h2>
+<p>Get a summary of your message.</p>
+<p><code>GET /messages/:id/preview</code></p>
+<h3 id="success-response_2">Success response</h3>
+<p><code>HTTP 200 OK</code></p>
+<pre><code>{
+  "recipients": ["contact@example.com"],
+  "excluded_recipients": ["already-spammed@example.com"],
+  "spam_score": null,
+  "is_spam": false,
+  "html": "[truncated]",
+  "plaintext": "[truncated]"
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>recipients</td>
+<td>array</td>
+<td>List of accepted <a href="../recipients/">recipients</a></td>
+</tr>
+<tr>
+<td>excluded_recipients</td>
+<td>array</td>
+<td>List of refused <a href="../recipients/">recipients</a> (for example, opt-outs)</td>
+</tr>
+<tr>
+<td>spam_score</td>
+<td>integer</td>
+<td>Spam score</td>
+</tr>
+<tr>
+<td>is_spam</td>
+<td>boolean</td>
+<td>Is considered as spam?</td>
+</tr>
+<tr>
+<td>html</td>
+<td>string</td>
+<td>HTML rendered (same as <a href="#retrieve-html-preview">html preview</a>)</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>Text rendered (same as <a href="#retrieve-text-preview">text preview</a>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="retrieve-text-preview">Retrieve text preview</h2>
+<p><code>GET /messages/:id/preview.txt</code></p>
+<h2 id="retrieve-html-preview">Retrieve HTML preview</h2>
+<p><code>GET /messages/:id/preview.html</code></p>
+<h2 id="retrieve-recipients">Retrieve recipients</h2>
+<p><code>GET /messages/:id/recipients</code></p>
+<h2 id="retrieve-bounces">Retrieve bounces</h2>
+<p><code>GET /messages/:id/bounces</code></p>
+<h2 id="retrieve-opt-outs">Retrieve opt-outs</h2>
+<p><code>GET /messages/:id/opt_outs</code></p>
+<h2 id="retrieve-stats">Retrieve stats</h2>
+<p>Retrieve message stats.</p>
+<p><code>GET /messages/:id/stats</code></p>
+<h3 id="success-response_3">Success response</h3>
+<p><code>HTTP 200 OK</code></p>
+<pre><code>{
+  "optout": {
+    "abuse": 0,
+    "feedback-loop": 0,
+    "total": 0,
+    "web": 0,
+    "mail": 0,
+    "bounce": 0
+  },
+  "count": {
+    "total": 0,
+    "had_delay": 0,
+    "done": 0,
+    "in_transit": 0
+  },
+  "tracking": {
+    "opened": 0,
+    "open_median_time": null,
+    "clicked_total": {},
+    "viewed_in_browser": 0,
+    "clicked": {
+      "any": 0
+    }
+  },
+  "last_status": {
+    "sending": 0,
+    "dropped": 0,
+    "unknown": 0,
+    "ignored": 0,
+    "bounced": 0,
+    "queued": 0,
+    "delivered": 0
+  },
+  "timing": {
+    "delivery_total": 0,
+    "delivery_median": 0
+  }
+}
+</code></pre>
+<h2 id="retrieve-attachments">Retrieve attachments</h2>
+<p><code>GET /messages/:id/attachments</code></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

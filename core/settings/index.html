@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://github.com/crunchmail/munch/core/settings/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Settings - Munch</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Munch</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../dev/">Developer guide</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../install/">Install</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Core <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li class="active">
+    <a href="./">Settings</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../workers/">Workers</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../deploy/">Deployment</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../storage_backends/">Storage backends</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../email_backends/">Email backends</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">REST <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../rest/">Overview</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Users</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../rest/users/users/">Users</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/users/organizations/">Organizations</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/users/api_applications/">API applications</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/users/smtp_applications/">SMTP applications</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+<li >
+    <a href="../../rest/domains/">Domains</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Campaigns</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../rest/campaigns/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/campaigns/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/campaigns/messages/">Messages</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/campaigns/attachments/">Attachments</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/campaigns/recipients/">Recipients</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Transactional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../rest/transactional/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/transactional/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/transactional/mails/">Mails</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../rest/transactional/batches/">Batches</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../../install/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../workers/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/crunchmail/munch">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#settings">Settings</a></li>
+        
+            <li><a href="#global">Global</a></li>
+        
+            <li><a href="#transactional-edge">Transactional (Edge)</a></li>
+        
+            <li><a href="#mailsend-output-smtp">Mailsend (Output SMTP)</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="settings">Settings</h1>
+<p>Here you'll find important settings but not all settings.
+You can take a look at <a href="https://github.com/crunchmail/munch-core/blob/master/src/munch/settings/production.dist">production.dist</a>.</p>
+<h2 id="global">Global</h2>
+<pre><code class="python"># RabbitMQ
+BROKER_URL = 'amqp://guest:guest@127.0.0.1:5682/munch'
+# PostgreSQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'munch',
+        'USER': 'munch',
+        'PASSWORD': 'munch',
+        'HOST': '127.0.0.1',
+        'PORT': '15432',
+    }
+}
+# Redis
+CACHES = {
+    &quot;default&quot;: {
+        &quot;BACKEND&quot;: &quot;django_redis.cache.RedisCache&quot;,
+        &quot;LOCATION&quot;: &quot;redis://127.0.0.1:16379/1&quot;,
+        &quot;OPTIONS&quot;: {
+            &quot;CLIENT_CLASS&quot;: &quot;django_redis.client.DefaultClient&quot;,
+        }
+    }
+}
+</code></pre>
+
+<h2 id="transactional-edge">Transactional (Edge)</h2>
+<h3 id="ssl">SSL</h3>
+<p>If you want to offer <em>STARTTLS</em> support, you should mention public certificate and private key files in settings: ::</p>
+<pre><code>TRANSACTIONAL['SMTP_SMARTHOST_TLS'] = {
+    'keyfile': '/home/munch/utils/ssl/postfix.example.com.key.pem',
+    'certfile': '/home/munch/utils/ssl/postfix.example.com.cert.pem',
+}
+</code></pre>
+<p>You may want <em>certfile</em> to contain a certificate chain, see
+<a href="https://docs.python.org/3.4/library/ssl.html#certificate-chains">python ssl doc</a>.</p>
+<p><em>Note: STARTTLS is then allowed but not forced</em></p>
+<h3 id="authentication">Authentication</h3>
+<p>At the moment, simple authentication against a map of users/passwords is
+supported. By default, it's open without authentication.</p>
+<p>To enable it:</p>
+<pre><code>TRANSACTIONAL['SMTP_REQUIRE_CREDENTIALS'] = True
+TRANSACTIONAL['SMTP_CREDENTIALS'] = {'jane.doe': 'somesecretpassword'}
+</code></pre>
+<h3 id="port-binding">Port Binding</h3>
+<p>You can tune where do the smtp smarthost daemon binds its socket:</p>
+<pre><code>TRANSACTIONAL['SMTP_BIND_HOST'] = '0.0.0.0'
+TRANSACTIONAL['SMTP_BIND_PORT'] = 1026
+</code></pre>
+<h3 id="webhook-failures">Webhook failures</h3>
+<p>In case HTTP webhook cannot be reached, you can tune how many times you want
+them to be retried and the interval between two attempts.</p>
+<pre><code>STATUS_WEBHOOK_MAX_ATTEMPTS=12  # None for infinite attempts
+STATUS_WEBHOOK_RETRY_INTERVAL=180
+</code></pre>
+<h2 id="mailsend-output-smtp">Mailsend (Output SMTP)</h2>
+<p>This configure part will be moved in <em>Mailsend</em> documentation later.</p>
+<p><em>EHLO/HELO</em> host and output IP are by default using FQDN and system routing, but they can be overrided:</p>
+<pre><code>MAILSEND['SMTP_WORKER_EHLO_AS'] = 'munch.example.com'
+MAILSEND['SMTP_WORKER_SRC_ADDR'] = '1.2.3.4'
+</code></pre>
+<p>(make sure the host actually has the IP and that hostname points to it).</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://github.com/crunchmail/munch/rest/users/organizations/">
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+	<title>Organizations - Munch</title>
+
+        <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../css/highlight.css">
+        <link href="../../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../../..">Munch</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../../dev/">Developer guide</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../../install/">Install</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Core <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../../core/settings/">Settings</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/workers/">Workers</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/deploy/">Deployment</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/storage_backends/">Storage backends</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../../core/email_backends/">Email backends</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">REST <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../">Overview</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Users</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../users/">Users</a>
+</li>
+
+        
+            
+<li class="active">
+    <a href="./">Organizations</a>
+</li>
+
+        
+            
+<li >
+    <a href="../api_applications/">API applications</a>
+</li>
+
+        
+            
+<li >
+    <a href="../smtp_applications/">SMTP applications</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+<li >
+    <a href="../../domains/">Domains</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Campaigns</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../campaigns/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../campaigns/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../campaigns/messages/">Messages</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../campaigns/attachments/">Attachments</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../campaigns/recipients/">Recipients</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Transactional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../../transactional/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../transactional/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../transactional/mails/">Mails</a>
+</li>
+
+        
+            
+<li >
+    <a href="../../transactional/batches/">Batches</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../users/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../api_applications/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/crunchmail/munch">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#organizations">Organizations</a></li>
+        
+            <li><a href="#get-an-organization">Get an organization</a></li>
+        
+            <li><a href="#list-your-organizations">List your organizations</a></li>
+        
+            <li><a href="#modify-an-organization">Modify an organization</a></li>
+        
+            <li><a href="#list-organization-children">List organization children</a></li>
+        
+            <li><a href="#invite-a-user-into-an-organization">Invite a user into an organization</a></li>
+        
+            <li><a href="#list-organization-opt-outs-todo">List organization opt-outs (todo)</a></li>
+        
+            <li><a href="#create-child-organization">Create child organization</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="organizations">Organizations</h1>
+<p>Manage your organization, its children and invitations.</p>
+<h2 id="get-an-organization">Get an organization</h2>
+<p>Return an organization.</p>
+<p><code>GET /organizations/:id</code></p>
+<h3 id="success-response">Success response</h3>
+<p><code>HTTP/1.1 200 OK</code></p>
+<pre><code>{
+  "url": "/organizations/1/",
+  "name": "Example",
+  "contact_email": "contact@example.com",
+  "settings": {
+    "nickname": "",
+    "notify_message_status": true,
+    "notify_optouts": false,
+    "external_optout_message": ""
+  },
+  "parent": null,
+  "can_attach_files": false,
+  "can_external_optout": false,
+  "_links": {
+    "opt_outs": {
+      "href": "/organizations/1/opt_outs/"
+    },
+    "children": {
+      "href": "/organizations/1/children/"
+    },
+   "invite_user": {
+      "href": "/organizations/1/invite_user/"
+    }
+  }
+}
+</code></pre>
+<h2 id="list-your-organizations">List your organizations</h2>
+<p>Return a list of organization with user organization and childrens.</p>
+<p><code>GET /organizations</code></p>
+<h3 id="success-response_1">Success response</h3>
+<p><code>HTTP/1.1 200 OK</code></p>
+<p>Same as get an <a href="#get-an-organization">organization</a> section as a list.</p>
+<h2 id="modify-an-organization">Modify an organization</h2>
+<p>Update your orgnization or a child one.</p>
+<p><code>PUT /organizations/:id</code></p>
+<h3 id="success-response_2">Success response</h3>
+<p>Return updated <a href="#get-an-organization">organization</a>.</p>
+<h3 id="error-response">Error response</h3>
+<p><code>HTTP/1.1 400 Bad Request</code></p>
+<pre><code>{
+  "contact_email": [
+    "Saisissez une adresse email valable."
+  ]
+}
+</code></pre>
+<h2 id="list-organization-children">List organization children</h2>
+<p>Return list of children organizations.</p>
+<p><code>GET /organizations/:id/children</code></p>
+<h3 id="success-response_3">Success response</h3>
+<p>Same as get an <a href="#get-an-organization">organization</a> section as a list.</p>
+<h2 id="invite-a-user-into-an-organization">Invite a user into an organization</h2>
+<p>Invite a user into an organization.</p>
+<p><code>POST /organizations/:id/invite_user</code></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identifier</td>
+<td>string</td>
+<td>User identifier</td>
+</tr>
+</tbody>
+</table>
+<h3 id="success-response_4">Success response</h3>
+<p><code>HTTP 201 Created</code></p>
+<pre><code>{
+  "identifier": "test@example.com"
+}
+</code></pre>
+<h2 id="list-organization-opt-outs-todo">List organization opt-outs (todo)</h2>
+<p>Todo.</p>
+<h2 id="create-child-organization">Create child organization</h2>
+<p>Only organization administrator can create child organization.</p>
+<p><code>POST /oganizations</code></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Name</td>
+</tr>
+<tr>
+<td>contact_email</td>
+<td>string</td>
+<td>Email</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>string</td>
+<td>Parent organization URL in case of child</td>
+</tr>
+<tr>
+<td>settings</td>
+<td>object</td>
+<td></td>
+</tr>
+<tr>
+<td>settings.nickname</td>
+<td>string</td>
+<td>Nickname</td>
+</tr>
+<tr>
+<td>settings.notify_message_status</td>
+<td>string</td>
+<td>Notify <code>contact_email</code> on status changes</td>
+</tr>
+<tr>
+<td>settings.notify_optouts</td>
+<td>string</td>
+<td>Notify <code>contact_email</code> on new opt-out</td>
+</tr>
+<tr>
+<td>settings.external_optout_message</td>
+<td>string</td>
+<td>Custom external optout message</td>
+</tr>
+</tbody>
+</table>
+<h3 id="success-response_5">Success response</h3>
+<p><code>HTTP 201 Created</code></p>
+<pre><code>{
+  "url": "/organizations/2/",
+  "name": "Child organization",
+  "contact_email": "contact@example.com",
+  "settings": {
+    "nickname": "nickname",
+    "notify_message_status": false,
+    "notify_optouts": false,
+    "external_optout_message": "Custom message"
+  },
+  "parent": "/organizations/1/",
+  "can_attach_files": false,
+  "can_external_optout": false,
+  "_links": {
+    "opt_outs": {
+      "href": "/organizations/2/opt_outs/"
+    },
+    "children": {
+      "href": "/organizations/2/children/"
+    },
+    "invite_user": {
+      "href": "/organizations/2/invite_user/"
+    }
+  }
+}
+</code></pre></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../../js/highlight.pack.js"></script>
+        <script>var base_url = '../../..';</script>
+        <script data-main="../../../mkdocs/js/search.js" src="../../../mkdocs/js/require.js"></script>
+        <script src="../../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

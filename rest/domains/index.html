@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://github.com/crunchmail/munch/rest/domains/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+	<title>Domains - Munch</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Munch</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../dev/">Developer guide</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../install/">Install</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Core <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../../core/settings/">Settings</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../core/workers/">Workers</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../core/deploy/">Deployment</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../core/storage_backends/">Storage backends</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../../core/email_backends/">Email backends</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">REST <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../">Overview</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Users</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../users/users/">Users</a>
+</li>
+
+        
+            
+<li >
+    <a href="../users/organizations/">Organizations</a>
+</li>
+
+        
+            
+<li >
+    <a href="../users/api_applications/">API applications</a>
+</li>
+
+        
+            
+<li >
+    <a href="../users/smtp_applications/">SMTP applications</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+<li class="active">
+    <a href="./">Domains</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Campaigns</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../campaigns/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../campaigns/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../campaigns/messages/">Messages</a>
+</li>
+
+        
+            
+<li >
+    <a href="../campaigns/attachments/">Attachments</a>
+</li>
+
+        
+            
+<li >
+    <a href="../campaigns/recipients/">Recipients</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Transactional</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../transactional/overview/">Overview</a>
+</li>
+
+        
+            
+<li >
+    <a href="../transactional/categories/">Categories</a>
+</li>
+
+        
+            
+<li >
+    <a href="../transactional/mails/">Mails</a>
+</li>
+
+        
+            
+<li >
+    <a href="../transactional/batches/">Batches</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                <li >
+                    <a rel="next" href="../users/smtp_applications/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../campaigns/overview/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/crunchmail/munch">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#sending-domains">Sending domains</a></li>
+        
+            <li><a href="#create-a-sending-domain">Create a sending domain</a></li>
+        
+            <li><a href="#list-sending-domains">List sending domains</a></li>
+        
+            <li><a href="#retrieve-a-sending-domain">Retrieve a sending domain</a></li>
+        
+            <li><a href="#revalidate-a-domain">Revalidate a domain</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="sending-domains">Sending domains</h1>
+<p>Sending domains are required to sent messages and mails (from transactional app.)</p>
+<p>In order to validate a domain, you'll need to pass tests (like <code>SPF</code>).</p>
+<p>Domains are automatically checked and will be re-check regularly.</p>
+<h2 id="create-a-sending-domain">Create a sending domain</h2>
+<p><code>POST /domains</code></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Domain name</td>
+</tr>
+<tr>
+<td>alt_organizations</td>
+<td>array</td>
+<td>Array of children organization URLs</td>
+</tr>
+<tr>
+<td>app_domain</td>
+<td>string</td>
+<td>Custom application domain</td>
+</tr>
+</tbody>
+</table>
+<h3 id="success-response">Success response</h3>
+<p><code>HTTP 201 Created</code></p>
+<pre><code>{
+  "url": "/domains/1/",
+  "name": "test.example.com",
+  "dkim_status": "pending",
+  "app_domain_status": "unknown",
+  "alt_organizations": [
+    "/organizations/2/"
+  ],
+  "app_domain": "",
+  "app_domain_status_date": null,
+  "dkim_status_date": null,
+  "_links": {
+    "revalidate": {
+      "href": "/domains/1/revalidate/"
+    }
+  }
+}
+</code></pre>
+<h2 id="list-sending-domains">List sending domains</h2>
+<p><code>GET /domains</code></p>
+<p>List of <a href="#create-a-sending-domain">domains</a>.</p>
+<h2 id="retrieve-a-sending-domain">Retrieve a sending domain</h2>
+<p><code>GET /domains/:id</code></p>
+<p>Retrieve a specific <a href="#create-a-sending-domain">domain</a>.</p>
+<h2 id="revalidate-a-domain">Revalidate a domain</h2>
+<p>Request a <a href="#create-a-sending-domain">domain</a> validation.</p>
+<p><code>POST /domains/:id/revalidate</code></p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+
+        <script src="../../js/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/highlight.pack.js"></script>
+        <script>var base_url = '../..';</script>
+        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+        <script src="../../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,824 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Munch\n\n\nMunch is mostly a \nREST API\n which allow you to manage your email\ncampaigns and send it to \nmany\n recipients.\n\n\nIt allow you to track your recipients opens and clicks and to manage\ncampaigns unsubscribes, bounces, opt-outs, sending domains checking and more.\n\n\nThis documentation aims to help you install Munch as developer or\nuser and allow you to consume its REST API.\n\n\nScope\n\n\nMunch is\n:\n\n\n\n\na REST HTTP/API\n\n\na dedicated infastructure to sent big amount of emails\n\n\n\n\nMunch is not\n:\n\n\n\n\na user application: you'll need to build your interface\n\n\na spam relay (seriously?)\n\n\n\n\nInternals\n\n\nMunch is a Django project built as a python package (pip installable).\n\n\n\n\nPython3.4\n\n\nDjango\n\n\nDRF\n\n\nCelery\n\n\nPostgreSQL\n\n\nRedis\n\n\nRabbitMQ",
+            "title": "Home"
+        },
+        {
+            "location": "/#munch",
+            "text": "Munch is mostly a  REST API  which allow you to manage your email\ncampaigns and send it to  many  recipients.  It allow you to track your recipients opens and clicks and to manage\ncampaigns unsubscribes, bounces, opt-outs, sending domains checking and more.  This documentation aims to help you install Munch as developer or\nuser and allow you to consume its REST API.",
+            "title": "Munch"
+        },
+        {
+            "location": "/#scope",
+            "text": "Munch is :   a REST HTTP/API  a dedicated infastructure to sent big amount of emails   Munch is not :   a user application: you'll need to build your interface  a spam relay (seriously?)",
+            "title": "Scope"
+        },
+        {
+            "location": "/#internals",
+            "text": "Munch is a Django project built as a python package (pip installable).   Python3.4  Django  DRF  Celery  PostgreSQL  Redis  RabbitMQ",
+            "title": "Internals"
+        },
+        {
+            "location": "/dev/",
+            "text": "Developer guide\n\n\nThis documentation explain how to install a dev or test setup of Munch.\n\n\nRequirements\n\n\n\n\nPython 3.4\n\n\nDocker \n docker-compose\n\n\n\n\nInstall\n\n\ngit clone https://github.com/oasiswork/munch.git\ncd munch\npip install -U virtualenv\nvirtualenv -p python3.4 .venv\nmake init_dev\n\n\n\nIt will:\n\n\n\n\nBoot every machines (PostgreSQL, RabbitMQ, Redis, Postfix, Spamd) with docker-compose\n\n\nInstall every dependencies in your virtualenv.\n\n\n\n\nYou'll see default users in command output.\n\n\nSettings\n\n\nFeel free to edit dev settings: \nsrc/munch/settings/local.py\n.\n\n\nRunning tests\n\n\nTests use a specific settings file (\nsrc/munch/settings/tests.py\n). Then to run test suite:\n\n\npython manage.py test munch\n\n\n\nTo run linter (based on \nsetup.cfg\n):\n\n\nflake8\n\n\n\nRun\n\n\nMunch is composed of multiple components under \nmunch\n command line.\n\n\n\n\nweb app\n: \nmunch django runserver\n\n\nworker\n: `munch run worker --worker-type=all\n\n\nbackmuncher\n (incoming dsn): \nmunch run backmuncher\n\n\ncron\n (scheduled tasks): \nmunch run cron\n\n\n\n\n    $ munch --help\n    Usage: munch [OPTIONS] COMMAND [ARGS]...\n\n      Munch is an emailing platform.\n\n      Default settings module is `munch.settings` but it can be overridden with\n      `DJANGO_CONFIG_MODULE` or with `--config` parameter.\n\n    Options:\n      --config PATH  Path to settings module.\n      --version      Show the version and exit.\n      --help         Show this message and exit.\n\n    Commands:\n      django   Execute Django subcommands.\n      help     Show this message and exit.\n      migrate  Run migrations (like `munch django migrate`).\n      run      Run a service.\n      shell    Run a Python interactive interpreter.\n\n\n\n\n    $ munch run --help\n    Usage: munch run [OPTIONS] COMMAND [ARGS]...\n\n      Run a service.\n\n    Options:\n      --help  Show this message and exit.\n\n    Commands:\n      backmuncher  Run smtp that handle feedback loops,...\n      cron         Run periodic task dispatcher.\n      smtp         Run smtp smarthost for transactional service.\n      worker       Run background worker instance.\n\n\n\n\nSnippets\n\n\nSending e-mails\n\n\nYou may want to \napt install swaks\n, and then:\n\n\nswaks -s localhost:1025 --to someone@localhost \\\n      --au admin --ap admin\n\n\n\nThe \ndomain postfix.example.com\n is staticaly bound to \nlocalhost:15625\n,\nregardless of what DNS actualy says. (which is the listening port of vagrant\npostfix), for testing purposes.\n\n\nFor example, that will be sent from yom to the vagrant VM: ::\n\n\nswaks -s 127.0.0.1:1025 --to root@postfix.example.com \\\n      --au admin --ap admin \\\n      --header-X-HTTP-Return-Path http://127.0.0.1:8098/ping\n\n\n\nHTTP webhooks\n\n\nYou can run the included test server (along with celery and yom_smarthost, as explained before):\n\n\npython -m munch.utils.http_webhook_server\n\n\n\nAnd run a test:\n\n\nswaks -s 127.0.0.1:1025 --to someone@localhost \\\n      --au admin --ap admin \\\n      --header-X-HTTP-Return-Path http://127.0.0.1:8098/ping\n\n\n\nAdd or update permissions\n\n\nUse \n./manage.py permissions_migration \napp_label\n.\n\n\nList permissions\n\n\nUse \n./manage.py list_permissions\n.",
+            "title": "Developer guide"
+        },
+        {
+            "location": "/dev/#developer-guide",
+            "text": "This documentation explain how to install a dev or test setup of Munch.",
+            "title": "Developer guide"
+        },
+        {
+            "location": "/dev/#requirements",
+            "text": "Python 3.4  Docker   docker-compose",
+            "title": "Requirements"
+        },
+        {
+            "location": "/dev/#install",
+            "text": "git clone https://github.com/oasiswork/munch.git\ncd munch\npip install -U virtualenv\nvirtualenv -p python3.4 .venv\nmake init_dev  It will:   Boot every machines (PostgreSQL, RabbitMQ, Redis, Postfix, Spamd) with docker-compose  Install every dependencies in your virtualenv.   You'll see default users in command output.",
+            "title": "Install"
+        },
+        {
+            "location": "/dev/#settings",
+            "text": "Feel free to edit dev settings:  src/munch/settings/local.py .",
+            "title": "Settings"
+        },
+        {
+            "location": "/dev/#running-tests",
+            "text": "Tests use a specific settings file ( src/munch/settings/tests.py ). Then to run test suite:  python manage.py test munch  To run linter (based on  setup.cfg ):  flake8",
+            "title": "Running tests"
+        },
+        {
+            "location": "/dev/#run",
+            "text": "Munch is composed of multiple components under  munch  command line.   web app :  munch django runserver  worker : `munch run worker --worker-type=all  backmuncher  (incoming dsn):  munch run backmuncher  cron  (scheduled tasks):  munch run cron       $ munch --help\n    Usage: munch [OPTIONS] COMMAND [ARGS]...\n\n      Munch is an emailing platform.\n\n      Default settings module is `munch.settings` but it can be overridden with\n      `DJANGO_CONFIG_MODULE` or with `--config` parameter.\n\n    Options:\n      --config PATH  Path to settings module.\n      --version      Show the version and exit.\n      --help         Show this message and exit.\n\n    Commands:\n      django   Execute Django subcommands.\n      help     Show this message and exit.\n      migrate  Run migrations (like `munch django migrate`).\n      run      Run a service.\n      shell    Run a Python interactive interpreter.      $ munch run --help\n    Usage: munch run [OPTIONS] COMMAND [ARGS]...\n\n      Run a service.\n\n    Options:\n      --help  Show this message and exit.\n\n    Commands:\n      backmuncher  Run smtp that handle feedback loops,...\n      cron         Run periodic task dispatcher.\n      smtp         Run smtp smarthost for transactional service.\n      worker       Run background worker instance.",
+            "title": "Run"
+        },
+        {
+            "location": "/dev/#snippets",
+            "text": "",
+            "title": "Snippets"
+        },
+        {
+            "location": "/dev/#sending-e-mails",
+            "text": "You may want to  apt install swaks , and then:  swaks -s localhost:1025 --to someone@localhost \\\n      --au admin --ap admin  The  domain postfix.example.com  is staticaly bound to  localhost:15625 ,\nregardless of what DNS actualy says. (which is the listening port of vagrant\npostfix), for testing purposes.  For example, that will be sent from yom to the vagrant VM: ::  swaks -s 127.0.0.1:1025 --to root@postfix.example.com \\\n      --au admin --ap admin \\\n      --header-X-HTTP-Return-Path http://127.0.0.1:8098/ping",
+            "title": "Sending e-mails"
+        },
+        {
+            "location": "/dev/#http-webhooks",
+            "text": "You can run the included test server (along with celery and yom_smarthost, as explained before):  python -m munch.utils.http_webhook_server  And run a test:  swaks -s 127.0.0.1:1025 --to someone@localhost \\\n      --au admin --ap admin \\\n      --header-X-HTTP-Return-Path http://127.0.0.1:8098/ping",
+            "title": "HTTP webhooks"
+        },
+        {
+            "location": "/dev/#add-or-update-permissions",
+            "text": "Use  ./manage.py permissions_migration  app_label .",
+            "title": "Add or update permissions"
+        },
+        {
+            "location": "/dev/#list-permissions",
+            "text": "Use  ./manage.py list_permissions .",
+            "title": "List permissions"
+        },
+        {
+            "location": "/install/",
+            "text": "Installation guide\n\n\nDepending on your needs, you can set-up a small architecture or a more scalable one.\n\n\nRequirements\n:\n\n\n\n\nPostgreSQL 9.4\n\n\nRedis 3\n\n\nRabbitMQ 3.6\n\n\n\n\nMay work with most recent versions.\n\n\nDocker\n\n\nYou can find a \nDockerfile\n in repository.",
+            "title": "Install"
+        },
+        {
+            "location": "/install/#installation-guide",
+            "text": "Depending on your needs, you can set-up a small architecture or a more scalable one.  Requirements :   PostgreSQL 9.4  Redis 3  RabbitMQ 3.6   May work with most recent versions.",
+            "title": "Installation guide"
+        },
+        {
+            "location": "/install/#docker",
+            "text": "You can find a  Dockerfile  in repository.",
+            "title": "Docker"
+        },
+        {
+            "location": "/core/settings/",
+            "text": "Settings\n\n\nHere you'll find important settings but not all settings.\nYou can take a look at \nproduction.dist\n.\n\n\nGlobal\n\n\n# RabbitMQ\nBROKER_URL = 'amqp://guest:guest@127.0.0.1:5682/munch'\n# PostgreSQL\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': 'munch',\n        'USER': 'munch',\n        'PASSWORD': 'munch',\n        'HOST': '127.0.0.1',\n        'PORT': '15432',\n    }\n}\n# Redis\nCACHES = {\n    \ndefault\n: {\n        \nBACKEND\n: \ndjango_redis.cache.RedisCache\n,\n        \nLOCATION\n: \nredis://127.0.0.1:16379/1\n,\n        \nOPTIONS\n: {\n            \nCLIENT_CLASS\n: \ndjango_redis.client.DefaultClient\n,\n        }\n    }\n}\n\n\n\n\nTransactional (Edge)\n\n\nSSL\n\n\nIf you want to offer \nSTARTTLS\n support, you should mention public certificate and private key files in settings: ::\n\n\nTRANSACTIONAL['SMTP_SMARTHOST_TLS'] = {\n    'keyfile': '/home/munch/utils/ssl/postfix.example.com.key.pem',\n    'certfile': '/home/munch/utils/ssl/postfix.example.com.cert.pem',\n}\n\n\n\nYou may want \ncertfile\n to contain a certificate chain, see\n\npython ssl doc\n.\n\n\nNote: STARTTLS is then allowed but not forced\n\n\nAuthentication\n\n\nAt the moment, simple authentication against a map of users/passwords is\nsupported. By default, it's open without authentication.\n\n\nTo enable it:\n\n\nTRANSACTIONAL['SMTP_REQUIRE_CREDENTIALS'] = True\nTRANSACTIONAL['SMTP_CREDENTIALS'] = {'jane.doe': 'somesecretpassword'}\n\n\n\nPort Binding\n\n\nYou can tune where do the smtp smarthost daemon binds its socket:\n\n\nTRANSACTIONAL['SMTP_BIND_HOST'] = '0.0.0.0'\nTRANSACTIONAL['SMTP_BIND_PORT'] = 1026\n\n\n\nWebhook failures\n\n\nIn case HTTP webhook cannot be reached, you can tune how many times you want\nthem to be retried and the interval between two attempts.\n\n\nSTATUS_WEBHOOK_MAX_ATTEMPTS=12  # None for infinite attempts\nSTATUS_WEBHOOK_RETRY_INTERVAL=180\n\n\n\nMailsend (Output SMTP)\n\n\nThis configure part will be moved in \nMailsend\n documentation later.\n\n\nEHLO/HELO\n host and output IP are by default using FQDN and system routing, but they can be overrided:\n\n\nMAILSEND['SMTP_WORKER_EHLO_AS'] = 'munch.example.com'\nMAILSEND['SMTP_WORKER_SRC_ADDR'] = '1.2.3.4'\n\n\n\n(make sure the host actually has the IP and that hostname points to it).",
+            "title": "Settings"
+        },
+        {
+            "location": "/core/settings/#settings",
+            "text": "Here you'll find important settings but not all settings.\nYou can take a look at  production.dist .",
+            "title": "Settings"
+        },
+        {
+            "location": "/core/settings/#global",
+            "text": "# RabbitMQ\nBROKER_URL = 'amqp://guest:guest@127.0.0.1:5682/munch'\n# PostgreSQL\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.postgresql_psycopg2',\n        'NAME': 'munch',\n        'USER': 'munch',\n        'PASSWORD': 'munch',\n        'HOST': '127.0.0.1',\n        'PORT': '15432',\n    }\n}\n# Redis\nCACHES = {\n     default : {\n         BACKEND :  django_redis.cache.RedisCache ,\n         LOCATION :  redis://127.0.0.1:16379/1 ,\n         OPTIONS : {\n             CLIENT_CLASS :  django_redis.client.DefaultClient ,\n        }\n    }\n}",
+            "title": "Global"
+        },
+        {
+            "location": "/core/settings/#transactional-edge",
+            "text": "",
+            "title": "Transactional (Edge)"
+        },
+        {
+            "location": "/core/settings/#ssl",
+            "text": "If you want to offer  STARTTLS  support, you should mention public certificate and private key files in settings: ::  TRANSACTIONAL['SMTP_SMARTHOST_TLS'] = {\n    'keyfile': '/home/munch/utils/ssl/postfix.example.com.key.pem',\n    'certfile': '/home/munch/utils/ssl/postfix.example.com.cert.pem',\n}  You may want  certfile  to contain a certificate chain, see python ssl doc .  Note: STARTTLS is then allowed but not forced",
+            "title": "SSL"
+        },
+        {
+            "location": "/core/settings/#authentication",
+            "text": "At the moment, simple authentication against a map of users/passwords is\nsupported. By default, it's open without authentication.  To enable it:  TRANSACTIONAL['SMTP_REQUIRE_CREDENTIALS'] = True\nTRANSACTIONAL['SMTP_CREDENTIALS'] = {'jane.doe': 'somesecretpassword'}",
+            "title": "Authentication"
+        },
+        {
+            "location": "/core/settings/#port-binding",
+            "text": "You can tune where do the smtp smarthost daemon binds its socket:  TRANSACTIONAL['SMTP_BIND_HOST'] = '0.0.0.0'\nTRANSACTIONAL['SMTP_BIND_PORT'] = 1026",
+            "title": "Port Binding"
+        },
+        {
+            "location": "/core/settings/#webhook-failures",
+            "text": "In case HTTP webhook cannot be reached, you can tune how many times you want\nthem to be retried and the interval between two attempts.  STATUS_WEBHOOK_MAX_ATTEMPTS=12  # None for infinite attempts\nSTATUS_WEBHOOK_RETRY_INTERVAL=180",
+            "title": "Webhook failures"
+        },
+        {
+            "location": "/core/settings/#mailsend-output-smtp",
+            "text": "This configure part will be moved in  Mailsend  documentation later.  EHLO/HELO  host and output IP are by default using FQDN and system routing, but they can be overrided:  MAILSEND['SMTP_WORKER_EHLO_AS'] = 'munch.example.com'\nMAILSEND['SMTP_WORKER_SRC_ADDR'] = '1.2.3.4'  (make sure the host actually has the IP and that hostname points to it).",
+            "title": "Mailsend (Output SMTP)"
+        },
+        {
+            "location": "/core/workers/",
+            "text": "Workers\n\n\nCore\n\n\n--worker-type\n option: core\n\n\n\n\nContacts and collected contacts opt-ins expirations (\nperiodic task\n)\n\n\nContacts and collected contacts bounce expirations (\nperiodic task\n)\n\n\nDelete consumed contacts after an expiration time (\nperiodic task\n)\n\n\nDelete expired and bounced contacts after an expiration time (\nperiodic task\n)\n\n\nHandle contacts subcription confirmation email bounces\n\n\n\n\nStatus\n\n\n--worker-type\n option: status\n\n\n\n\nHandle DSN\n\n\nHandle Feedback loop\n\n\nHandle mail optout\n\n\nRecord campaigns mail statuses\n\n\nTransactional DSN\n\n\nTransactional Webhook\n\n\nTransactional statuses\n\n\n\n\nRouter\n\n\n--worker-type\n option: router\n\n\n\n\nRoute envelope (\nmailsend\n)\n\n\n\n\nMX\n\n\n--worker-type\n option: mx\n\n\n\n\nSend email (\nmailsend\n)\n\n\n\n\nGarbage collector\n\n\n--worker-type\n option: gc\n\n\n\n\nPing workers (\nmailsend, periodic task\n)\n\n\nCheck disabled workers (\nmailsend, periodic task\n)\n\n\nDispatch queued (\nmailsend, periodic task\n)\n\n\nPurge raw mail (\nmailsend, periodic task\n)",
+            "title": "Workers"
+        },
+        {
+            "location": "/core/workers/#workers",
+            "text": "",
+            "title": "Workers"
+        },
+        {
+            "location": "/core/workers/#core",
+            "text": "--worker-type  option: core   Contacts and collected contacts opt-ins expirations ( periodic task )  Contacts and collected contacts bounce expirations ( periodic task )  Delete consumed contacts after an expiration time ( periodic task )  Delete expired and bounced contacts after an expiration time ( periodic task )  Handle contacts subcription confirmation email bounces",
+            "title": "Core"
+        },
+        {
+            "location": "/core/workers/#status",
+            "text": "--worker-type  option: status   Handle DSN  Handle Feedback loop  Handle mail optout  Record campaigns mail statuses  Transactional DSN  Transactional Webhook  Transactional statuses",
+            "title": "Status"
+        },
+        {
+            "location": "/core/workers/#router",
+            "text": "--worker-type  option: router   Route envelope ( mailsend )",
+            "title": "Router"
+        },
+        {
+            "location": "/core/workers/#mx",
+            "text": "--worker-type  option: mx   Send email ( mailsend )",
+            "title": "MX"
+        },
+        {
+            "location": "/core/workers/#garbage-collector",
+            "text": "--worker-type  option: gc   Ping workers ( mailsend, periodic task )  Check disabled workers ( mailsend, periodic task )  Dispatch queued ( mailsend, periodic task )  Purge raw mail ( mailsend, periodic task )",
+            "title": "Garbage collector"
+        },
+        {
+            "location": "/core/deploy/",
+            "text": "Deploy\n\n\nRequirements\n\n\nYou have one API machine and one or several workers, they should all point on\nthe same postgresql db and the same rabbitmq.\n\n\nWarning\n: make sure (using NTP for instance) that all your machines (worker, app, smtp) have and keep the good clock time or munch could get confused.\n\n\n$ apt-get install python3 python3-dev libpq-dev libxslt-dev libjpeg-dev\n\n\n\nRunning\n\n\nStart a SMTP smarthost edge: ::\n\n\nmunch run smtp\n\n\n\nStart wsgi app (\nmunch/wsgi.py\n) with gunicorn.\n\n\nStart mailsend worker with choosen role (view :ref:\nworkers\n in documentation): ::\n\n\nmunch run worker --worker-type [all|core|status|router|gc|mx]\n\n\n\nStart Celery Beat: ::\n\n\nmunch run cron",
+            "title": "Deployment"
+        },
+        {
+            "location": "/core/deploy/#deploy",
+            "text": "",
+            "title": "Deploy"
+        },
+        {
+            "location": "/core/deploy/#requirements",
+            "text": "You have one API machine and one or several workers, they should all point on\nthe same postgresql db and the same rabbitmq.  Warning : make sure (using NTP for instance) that all your machines (worker, app, smtp) have and keep the good clock time or munch could get confused.  $ apt-get install python3 python3-dev libpq-dev libxslt-dev libjpeg-dev",
+            "title": "Requirements"
+        },
+        {
+            "location": "/core/deploy/#running",
+            "text": "Start a SMTP smarthost edge: ::  munch run smtp  Start wsgi app ( munch/wsgi.py ) with gunicorn.  Start mailsend worker with choosen role (view :ref: workers  in documentation): ::  munch run worker --worker-type [all|core|status|router|gc|mx]  Start Celery Beat: ::  munch run cron",
+            "title": "Running"
+        },
+        {
+            "location": "/core/storage_backends/",
+            "text": "Storage backends\n\n\nDefault storage is file system (included in core) but Munch storage can be easily extended.\n\n\nExamples\n\n\n\n\nSwift\n\n\n\n\nAPI\n\n\nComing soon!",
+            "title": "Storage backends"
+        },
+        {
+            "location": "/core/storage_backends/#storage-backends",
+            "text": "Default storage is file system (included in core) but Munch storage can be easily extended.",
+            "title": "Storage backends"
+        },
+        {
+            "location": "/core/storage_backends/#examples",
+            "text": "Swift",
+            "title": "Examples"
+        },
+        {
+            "location": "/core/storage_backends/#api",
+            "text": "Coming soon!",
+            "title": "API"
+        },
+        {
+            "location": "/core/email_backends/",
+            "text": "Email backends\n\n\nDefault email backend is \nmailsend\n but Munch email backend can be easily extended.\n\n\nExamples\n\n\nComing soon!\n\n\nAPI\n\n\nComing soon!",
+            "title": "Email backends"
+        },
+        {
+            "location": "/core/email_backends/#email-backends",
+            "text": "Default email backend is  mailsend  but Munch email backend can be easily extended.",
+            "title": "Email backends"
+        },
+        {
+            "location": "/core/email_backends/#examples",
+            "text": "Coming soon!",
+            "title": "Examples"
+        },
+        {
+            "location": "/core/email_backends/#api",
+            "text": "Coming soon!",
+            "title": "API"
+        },
+        {
+            "location": "/rest/",
+            "text": "Overview\n\n\nCurrent version\n\n\nBy default, all requests receive the \nv1\n version of the API.\n\n\nSchema\n\n\nDepending of your setup, you can use \nHTTP\n and/or \nHTTPS\n.\n\n\nBlank fields are included as \nnull\n instead of being omitted.\n\n\nAll timestamps are returned in \nISO 8601\n: \nYYYY-MM-DDTHH:MM:SSZ\n\n\nRoot endpoint\n\n\nYou can issue a \nGET\n request to the root endpoint to get all\nendpoint categories that the API supports.\n\n\nAuthentication\n\n\nAuthentication is done with \nJWT\n or \nHTTP Auth\n.\n\n\nTODO\n: Must add \nJWT\n and \nHTTP Auth\n documentation.\n\n\nPagination\n\n\nMust of ressources are paginated like that:\n\n\n{\n  \"count\": 5022,\n  \"next\": \"/v1/recipients/?page=4\",\n  \"previous\": \"/v1/recipients/?page=2\",\n  \"page_count\": 100,\n  \"results\": []\n}\n\n\n\nHypertext Application Language\n\n\nMust of ressources have HAL links provided by \n_link\n field.\n\n\n{\n  \"_links\": {\n  \"optout\": {\n    \"href\": \"http://api.munch/v1/recipients/5612/optout/\"\n  },\n  \"status_log\": {\n    \"href\": \"http://api.munch/v1/recipients/5612/status_log/\"\n  }\n}\n\n\n\nAll links are not covered by documentation right now.",
+            "title": "Overview"
+        },
+        {
+            "location": "/rest/#overview",
+            "text": "",
+            "title": "Overview"
+        },
+        {
+            "location": "/rest/#current-version",
+            "text": "By default, all requests receive the  v1  version of the API.",
+            "title": "Current version"
+        },
+        {
+            "location": "/rest/#schema",
+            "text": "Depending of your setup, you can use  HTTP  and/or  HTTPS .  Blank fields are included as  null  instead of being omitted.  All timestamps are returned in  ISO 8601 :  YYYY-MM-DDTHH:MM:SSZ",
+            "title": "Schema"
+        },
+        {
+            "location": "/rest/#root-endpoint",
+            "text": "You can issue a  GET  request to the root endpoint to get all\nendpoint categories that the API supports.",
+            "title": "Root endpoint"
+        },
+        {
+            "location": "/rest/#authentication",
+            "text": "Authentication is done with  JWT  or  HTTP Auth .  TODO : Must add  JWT  and  HTTP Auth  documentation.",
+            "title": "Authentication"
+        },
+        {
+            "location": "/rest/#pagination",
+            "text": "Must of ressources are paginated like that:  {\n  \"count\": 5022,\n  \"next\": \"/v1/recipients/?page=4\",\n  \"previous\": \"/v1/recipients/?page=2\",\n  \"page_count\": 100,\n  \"results\": []\n}",
+            "title": "Pagination"
+        },
+        {
+            "location": "/rest/#hypertext-application-language",
+            "text": "Must of ressources have HAL links provided by  _link  field.  {\n  \"_links\": {\n  \"optout\": {\n    \"href\": \"http://api.munch/v1/recipients/5612/optout/\"\n  },\n  \"status_log\": {\n    \"href\": \"http://api.munch/v1/recipients/5612/status_log/\"\n  }\n}  All links are not covered by documentation right now.",
+            "title": "Hypertext Application Language"
+        },
+        {
+            "location": "/rest/users/users/",
+            "text": "Users\n\n\nManage own user.\n\n\nRetrieve a user\n\n\nReturn currently logged user.\n\n\nGET /me\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\n{\n  \"identifier\": \"admin@example.com\",\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"secret\": \"key-181d89e7a0d2a3e62c88c4d7e2\",\n  \"groups\": [\"administrators\"],\n  \"organization\": \"/organizations/1/\",\n  \"_links\": {\n    \"regen_secret\": {\"href\": \"/users/2/regen_secret/\"},\n    \"change_password\": {\"href\": \"/users/2/change_password/\"}\n  }\n}\n\n\n\nRegenerate secret\n\n\nRegenerate secret which is used for API authentication.\n\n\nPOST /users/:id/regen_secret\n\n\nEmpty body.\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\n\"LhrFLyXFYsRYMKKNDKzefjy2L1ChWM\"\n\n\nChange password\n\n\nChange user password.\n\n\nPOST /users/:id/change_password\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nold_password\n\n\nstring\n\n\nCurrent password\n\n\n\n\n\n\nnew_password\n\n\nstring\n\n\nNew passwsord\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\nEmpty response.\n\n\nIf success, this request will automatically logout you.\n\n\nError response\n\n\nIf \nold_password\n is not valid, API return an error.\n\n\nHTTP/1.1 400 Bad Request\n\n\n{\n  \"old_password\": [\n    \"Votre ancien mot de passe est incorrect.\"\n  ]\n}",
+            "title": "Users"
+        },
+        {
+            "location": "/rest/users/users/#users",
+            "text": "Manage own user.",
+            "title": "Users"
+        },
+        {
+            "location": "/rest/users/users/#retrieve-a-user",
+            "text": "Return currently logged user.  GET /me",
+            "title": "Retrieve a user"
+        },
+        {
+            "location": "/rest/users/users/#success-response",
+            "text": "HTTP 200 OK  {\n  \"identifier\": \"admin@example.com\",\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"secret\": \"key-181d89e7a0d2a3e62c88c4d7e2\",\n  \"groups\": [\"administrators\"],\n  \"organization\": \"/organizations/1/\",\n  \"_links\": {\n    \"regen_secret\": {\"href\": \"/users/2/regen_secret/\"},\n    \"change_password\": {\"href\": \"/users/2/change_password/\"}\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/users/#regenerate-secret",
+            "text": "Regenerate secret which is used for API authentication.  POST /users/:id/regen_secret  Empty body.",
+            "title": "Regenerate secret"
+        },
+        {
+            "location": "/rest/users/users/#success-response_1",
+            "text": "HTTP 200 OK  \"LhrFLyXFYsRYMKKNDKzefjy2L1ChWM\"",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/users/#change-password",
+            "text": "Change user password.  POST /users/:id/change_password     Name  Type  Description      old_password  string  Current password    new_password  string  New passwsord",
+            "title": "Change password"
+        },
+        {
+            "location": "/rest/users/users/#success-response_2",
+            "text": "HTTP 200 OK  Empty response.  If success, this request will automatically logout you.",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/users/#error-response",
+            "text": "If  old_password  is not valid, API return an error.  HTTP/1.1 400 Bad Request  {\n  \"old_password\": [\n    \"Votre ancien mot de passe est incorrect.\"\n  ]\n}",
+            "title": "Error response"
+        },
+        {
+            "location": "/rest/users/organizations/",
+            "text": "Organizations\n\n\nManage your organization, its children and invitations.\n\n\nGet an organization\n\n\nReturn an organization.\n\n\nGET /organizations/:id\n\n\nSuccess response\n\n\nHTTP/1.1 200 OK\n\n\n{\n  \"url\": \"/organizations/1/\",\n  \"name\": \"Example\",\n  \"contact_email\": \"contact@example.com\",\n  \"settings\": {\n    \"nickname\": \"\",\n    \"notify_message_status\": true,\n    \"notify_optouts\": false,\n    \"external_optout_message\": \"\"\n  },\n  \"parent\": null,\n  \"can_attach_files\": false,\n  \"can_external_optout\": false,\n  \"_links\": {\n    \"opt_outs\": {\n      \"href\": \"/organizations/1/opt_outs/\"\n    },\n    \"children\": {\n      \"href\": \"/organizations/1/children/\"\n    },\n   \"invite_user\": {\n      \"href\": \"/organizations/1/invite_user/\"\n    }\n  }\n}\n\n\n\nList your organizations\n\n\nReturn a list of organization with user organization and childrens.\n\n\nGET /organizations\n\n\nSuccess response\n\n\nHTTP/1.1 200 OK\n\n\nSame as get an \norganization\n section as a list.\n\n\nModify an organization\n\n\nUpdate your orgnization or a child one.\n\n\nPUT /organizations/:id\n\n\nSuccess response\n\n\nReturn updated \norganization\n.\n\n\nError response\n\n\nHTTP/1.1 400 Bad Request\n\n\n{\n  \"contact_email\": [\n    \"Saisissez une adresse email valable.\"\n  ]\n}\n\n\n\nList organization children\n\n\nReturn list of children organizations.\n\n\nGET /organizations/:id/children\n\n\nSuccess response\n\n\nSame as get an \norganization\n section as a list.\n\n\nInvite a user into an organization\n\n\nInvite a user into an organization.\n\n\nPOST /organizations/:id/invite_user\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nidentifier\n\n\nstring\n\n\nUser identifier\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"identifier\": \"test@example.com\"\n}\n\n\n\nList organization opt-outs (todo)\n\n\nTodo.\n\n\nCreate child organization\n\n\nOnly organization administrator can create child organization.\n\n\nPOST /oganizations\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nname\n\n\nstring\n\n\nName\n\n\n\n\n\n\ncontact_email\n\n\nstring\n\n\nEmail\n\n\n\n\n\n\nparent\n\n\nstring\n\n\nParent organization URL in case of child\n\n\n\n\n\n\nsettings\n\n\nobject\n\n\n\n\n\n\n\n\nsettings.nickname\n\n\nstring\n\n\nNickname\n\n\n\n\n\n\nsettings.notify_message_status\n\n\nstring\n\n\nNotify \ncontact_email\n on status changes\n\n\n\n\n\n\nsettings.notify_optouts\n\n\nstring\n\n\nNotify \ncontact_email\n on new opt-out\n\n\n\n\n\n\nsettings.external_optout_message\n\n\nstring\n\n\nCustom external optout message\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/organizations/2/\",\n  \"name\": \"Child organization\",\n  \"contact_email\": \"contact@example.com\",\n  \"settings\": {\n    \"nickname\": \"nickname\",\n    \"notify_message_status\": false,\n    \"notify_optouts\": false,\n    \"external_optout_message\": \"Custom message\"\n  },\n  \"parent\": \"/organizations/1/\",\n  \"can_attach_files\": false,\n  \"can_external_optout\": false,\n  \"_links\": {\n    \"opt_outs\": {\n      \"href\": \"/organizations/2/opt_outs/\"\n    },\n    \"children\": {\n      \"href\": \"/organizations/2/children/\"\n    },\n    \"invite_user\": {\n      \"href\": \"/organizations/2/invite_user/\"\n    }\n  }\n}",
+            "title": "Organizations"
+        },
+        {
+            "location": "/rest/users/organizations/#organizations",
+            "text": "Manage your organization, its children and invitations.",
+            "title": "Organizations"
+        },
+        {
+            "location": "/rest/users/organizations/#get-an-organization",
+            "text": "Return an organization.  GET /organizations/:id",
+            "title": "Get an organization"
+        },
+        {
+            "location": "/rest/users/organizations/#success-response",
+            "text": "HTTP/1.1 200 OK  {\n  \"url\": \"/organizations/1/\",\n  \"name\": \"Example\",\n  \"contact_email\": \"contact@example.com\",\n  \"settings\": {\n    \"nickname\": \"\",\n    \"notify_message_status\": true,\n    \"notify_optouts\": false,\n    \"external_optout_message\": \"\"\n  },\n  \"parent\": null,\n  \"can_attach_files\": false,\n  \"can_external_optout\": false,\n  \"_links\": {\n    \"opt_outs\": {\n      \"href\": \"/organizations/1/opt_outs/\"\n    },\n    \"children\": {\n      \"href\": \"/organizations/1/children/\"\n    },\n   \"invite_user\": {\n      \"href\": \"/organizations/1/invite_user/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/organizations/#list-your-organizations",
+            "text": "Return a list of organization with user organization and childrens.  GET /organizations",
+            "title": "List your organizations"
+        },
+        {
+            "location": "/rest/users/organizations/#success-response_1",
+            "text": "HTTP/1.1 200 OK  Same as get an  organization  section as a list.",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/organizations/#modify-an-organization",
+            "text": "Update your orgnization or a child one.  PUT /organizations/:id",
+            "title": "Modify an organization"
+        },
+        {
+            "location": "/rest/users/organizations/#success-response_2",
+            "text": "Return updated  organization .",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/organizations/#error-response",
+            "text": "HTTP/1.1 400 Bad Request  {\n  \"contact_email\": [\n    \"Saisissez une adresse email valable.\"\n  ]\n}",
+            "title": "Error response"
+        },
+        {
+            "location": "/rest/users/organizations/#list-organization-children",
+            "text": "Return list of children organizations.  GET /organizations/:id/children",
+            "title": "List organization children"
+        },
+        {
+            "location": "/rest/users/organizations/#success-response_3",
+            "text": "Same as get an  organization  section as a list.",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/organizations/#invite-a-user-into-an-organization",
+            "text": "Invite a user into an organization.  POST /organizations/:id/invite_user     Name  Type  Description      identifier  string  User identifier",
+            "title": "Invite a user into an organization"
+        },
+        {
+            "location": "/rest/users/organizations/#success-response_4",
+            "text": "HTTP 201 Created  {\n  \"identifier\": \"test@example.com\"\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/organizations/#list-organization-opt-outs-todo",
+            "text": "Todo.",
+            "title": "List organization opt-outs (todo)"
+        },
+        {
+            "location": "/rest/users/organizations/#create-child-organization",
+            "text": "Only organization administrator can create child organization.  POST /oganizations     Name  Type  Description      name  string  Name    contact_email  string  Email    parent  string  Parent organization URL in case of child    settings  object     settings.nickname  string  Nickname    settings.notify_message_status  string  Notify  contact_email  on status changes    settings.notify_optouts  string  Notify  contact_email  on new opt-out    settings.external_optout_message  string  Custom external optout message",
+            "title": "Create child organization"
+        },
+        {
+            "location": "/rest/users/organizations/#success-response_5",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/organizations/2/\",\n  \"name\": \"Child organization\",\n  \"contact_email\": \"contact@example.com\",\n  \"settings\": {\n    \"nickname\": \"nickname\",\n    \"notify_message_status\": false,\n    \"notify_optouts\": false,\n    \"external_optout_message\": \"Custom message\"\n  },\n  \"parent\": \"/organizations/1/\",\n  \"can_attach_files\": false,\n  \"can_external_optout\": false,\n  \"_links\": {\n    \"opt_outs\": {\n      \"href\": \"/organizations/2/opt_outs/\"\n    },\n    \"children\": {\n      \"href\": \"/organizations/2/children/\"\n    },\n    \"invite_user\": {\n      \"href\": \"/organizations/2/invite_user/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/api_applications/",
+            "text": "API applications\n\n\nManage your API applications per user to allow API authentication.\n\n\nApplications \nsecret\n cannot be updated.\nYou must regenerate secret or delete it and create a new one.\n\n\nCreate an application\n\n\nPOST /applications/api\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nidentifier\n\n\nstring\n\n\nApplication identifier\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/applications/api/1/\",\n  \"identifier\": \"example-identifier\",\n  \"secret\": \"wcGA2rqRQfqarme2dr0mdg\",\n  \"_links\": {\n    \"regen_secret\": {\n      \"href\": \"/applications/api/1/regen_secret/\"\n    }\n  }\n}\n\n\n\nList applications\n\n\nGET /applications/api\n\n\nReturn an list of \napplications\n.\n\n\nUpdate an application\n\n\nYou can only update \nidentifier\n field with a \nPUT\n request.\n\n\nDelete an application\n\n\nYou can delete an application with a \nDELETE\n on application URL.\n\n\nRegenerate secret\n\n\nYou can regenerate an application secret by submitting a \nPOST\n on \n/applications/api/:id/regen_secret\n.",
+            "title": "API applications"
+        },
+        {
+            "location": "/rest/users/api_applications/#api-applications",
+            "text": "Manage your API applications per user to allow API authentication.  Applications  secret  cannot be updated.\nYou must regenerate secret or delete it and create a new one.",
+            "title": "API applications"
+        },
+        {
+            "location": "/rest/users/api_applications/#create-an-application",
+            "text": "POST /applications/api     Name  Type  Description      identifier  string  Application identifier",
+            "title": "Create an application"
+        },
+        {
+            "location": "/rest/users/api_applications/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/applications/api/1/\",\n  \"identifier\": \"example-identifier\",\n  \"secret\": \"wcGA2rqRQfqarme2dr0mdg\",\n  \"_links\": {\n    \"regen_secret\": {\n      \"href\": \"/applications/api/1/regen_secret/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/api_applications/#list-applications",
+            "text": "GET /applications/api  Return an list of  applications .",
+            "title": "List applications"
+        },
+        {
+            "location": "/rest/users/api_applications/#update-an-application",
+            "text": "You can only update  identifier  field with a  PUT  request.",
+            "title": "Update an application"
+        },
+        {
+            "location": "/rest/users/api_applications/#delete-an-application",
+            "text": "You can delete an application with a  DELETE  on application URL.",
+            "title": "Delete an application"
+        },
+        {
+            "location": "/rest/users/api_applications/#regenerate-secret",
+            "text": "You can regenerate an application secret by submitting a  POST  on  /applications/api/:id/regen_secret .",
+            "title": "Regenerate secret"
+        },
+        {
+            "location": "/rest/users/smtp_applications/",
+            "text": "SMTP application\n\n\nManage your SMTP applications per user to allow transactional SMTP authentication.\n\n\nApplications \nsecret\n cannot be updated.\nYou must regenerate secret or delete it and create a new one.\n\n\nCreate an application\n\n\nPOST /applications/smtp\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nidentifier\n\n\nstring\n\n\nApplication identifier\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/applications/smtp/1/\",\n  \"username\": \"xxaUVNMHSROVx98QlkE4KA\",\n  \"secret\": \"NUZIjTMnQ4W_IgtVRZi6SA\",\n  \"identifier\": \"test\",\n  \"_links\": {\n    \"regen_credentials\": {\n      \"href\": \"/applications/smtp/2/regen_credentials/\"\n    }\n  }\n}\n\n\n\nList applications\n\n\nGET /applications/smtp\n\n\nReturn an list of \napplications\n.\n\n\nUpdate an application\n\n\nYou can only update \nidentifier\n field with a \nPUT\n request.\n\n\nDelete an application\n\n\nYou can delete an application with a \nDELETE\n on application URL.\n\n\nRegenerate secret\n\n\nYou can regenerate an application secret by submitting a \nPOST\n on \n/applications/smtp/:id/regen_secret\n.",
+            "title": "SMTP applications"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#smtp-application",
+            "text": "Manage your SMTP applications per user to allow transactional SMTP authentication.  Applications  secret  cannot be updated.\nYou must regenerate secret or delete it and create a new one.",
+            "title": "SMTP application"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#create-an-application",
+            "text": "POST /applications/smtp     Name  Type  Description      identifier  string  Application identifier",
+            "title": "Create an application"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/applications/smtp/1/\",\n  \"username\": \"xxaUVNMHSROVx98QlkE4KA\",\n  \"secret\": \"NUZIjTMnQ4W_IgtVRZi6SA\",\n  \"identifier\": \"test\",\n  \"_links\": {\n    \"regen_credentials\": {\n      \"href\": \"/applications/smtp/2/regen_credentials/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#list-applications",
+            "text": "GET /applications/smtp  Return an list of  applications .",
+            "title": "List applications"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#update-an-application",
+            "text": "You can only update  identifier  field with a  PUT  request.",
+            "title": "Update an application"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#delete-an-application",
+            "text": "You can delete an application with a  DELETE  on application URL.",
+            "title": "Delete an application"
+        },
+        {
+            "location": "/rest/users/smtp_applications/#regenerate-secret",
+            "text": "You can regenerate an application secret by submitting a  POST  on  /applications/smtp/:id/regen_secret .",
+            "title": "Regenerate secret"
+        },
+        {
+            "location": "/rest/domains/",
+            "text": "Sending domains\n\n\nSending domains are required to sent messages and mails (from transactional app.)\n\n\nIn order to validate a domain, you'll need to pass tests (like \nSPF\n).\n\n\nDomains are automatically checked and will be re-check regularly.\n\n\nCreate a sending domain\n\n\nPOST /domains\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nname\n\n\nstring\n\n\nDomain name\n\n\n\n\n\n\nalt_organizations\n\n\narray\n\n\nArray of children organization URLs\n\n\n\n\n\n\napp_domain\n\n\nstring\n\n\nCustom application domain\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/domains/1/\",\n  \"name\": \"test.example.com\",\n  \"dkim_status\": \"pending\",\n  \"app_domain_status\": \"unknown\",\n  \"alt_organizations\": [\n    \"/organizations/2/\"\n  ],\n  \"app_domain\": \"\",\n  \"app_domain_status_date\": null,\n  \"dkim_status_date\": null,\n  \"_links\": {\n    \"revalidate\": {\n      \"href\": \"/domains/1/revalidate/\"\n    }\n  }\n}\n\n\n\nList sending domains\n\n\nGET /domains\n\n\nList of \ndomains\n.\n\n\nRetrieve a sending domain\n\n\nGET /domains/:id\n\n\nRetrieve a specific \ndomain\n.\n\n\nRevalidate a domain\n\n\nRequest a \ndomain\n validation.\n\n\nPOST /domains/:id/revalidate",
+            "title": "Domains"
+        },
+        {
+            "location": "/rest/domains/#sending-domains",
+            "text": "Sending domains are required to sent messages and mails (from transactional app.)  In order to validate a domain, you'll need to pass tests (like  SPF ).  Domains are automatically checked and will be re-check regularly.",
+            "title": "Sending domains"
+        },
+        {
+            "location": "/rest/domains/#create-a-sending-domain",
+            "text": "POST /domains     Name  Type  Description      name  string  Domain name    alt_organizations  array  Array of children organization URLs    app_domain  string  Custom application domain",
+            "title": "Create a sending domain"
+        },
+        {
+            "location": "/rest/domains/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/domains/1/\",\n  \"name\": \"test.example.com\",\n  \"dkim_status\": \"pending\",\n  \"app_domain_status\": \"unknown\",\n  \"alt_organizations\": [\n    \"/organizations/2/\"\n  ],\n  \"app_domain\": \"\",\n  \"app_domain_status_date\": null,\n  \"dkim_status_date\": null,\n  \"_links\": {\n    \"revalidate\": {\n      \"href\": \"/domains/1/revalidate/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/domains/#list-sending-domains",
+            "text": "GET /domains  List of  domains .",
+            "title": "List sending domains"
+        },
+        {
+            "location": "/rest/domains/#retrieve-a-sending-domain",
+            "text": "GET /domains/:id  Retrieve a specific  domain .",
+            "title": "Retrieve a sending domain"
+        },
+        {
+            "location": "/rest/domains/#revalidate-a-domain",
+            "text": "Request a  domain  validation.  POST /domains/:id/revalidate",
+            "title": "Revalidate a domain"
+        },
+        {
+            "location": "/rest/campaigns/overview/",
+            "text": "Campaigns\n\n\nManage your campaigns, from a message, to recipients and finish with statuses.\n\n\nFirst of all, you'll need a validated \nsending domain\n.\n\n\nYou can start by creating some \ncategories\n, then build your very first \nmessage\n.\n\n\nMaybe you\u2019ll add some \nattachments\n. Add at least one \nrecipient\n.",
+            "title": "Overview"
+        },
+        {
+            "location": "/rest/campaigns/overview/#campaigns",
+            "text": "Manage your campaigns, from a message, to recipients and finish with statuses.  First of all, you'll need a validated  sending domain .  You can start by creating some  categories , then build your very first  message .  Maybe you\u2019ll add some  attachments . Add at least one  recipient .",
+            "title": "Campaigns"
+        },
+        {
+            "location": "/rest/campaigns/categories/",
+            "text": "Categories\n\n\nEvery messages (from campaigns) or batches (from transactional) needs to be linked to a category.\n\n\nCreate a category\n\n\nPOST /categories\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nname\n\n\nstring\n\n\nCategory name\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/categories/1/\",\n  \"name\": \"test\",\n  \"messages\": [],\n  \"batches\": [],\n  \"_links\": {\n    \"opt_outs\": {\n      \"href\": \"/categories/1/opt_outs/\"\n    },\n    \"stats\": {\n      \"href\": \"/categories/1/stats/\"\n    },\n    \"messages_stats\": {\n      \"href\": \"/categories/1/messages_stats/\"\n    }\n  }\n}\n\n\n\nRetrieve a category\n\n\nGET /categories/:id\n\n\nList your categories\n\n\nReturn your organization categories.\n\n\nGET /categories\n\n\nSuccess response\n\n\nReturn a list of \ncategories\n.\n\n\nModify a category\n\n\nUpdate a category.\n\n\nPUT /categories/:id\n\n\nDelete a category\n\n\n\n\nYou can only delete a category that doesn't have any\n\nmessage\n.\n\n\n\n\nList opt-outs (todo)\n\n\nRetrieve stats (todo)\n\n\nRetrieve messages stats (todo)",
+            "title": "Categories"
+        },
+        {
+            "location": "/rest/campaigns/categories/#categories",
+            "text": "Every messages (from campaigns) or batches (from transactional) needs to be linked to a category.",
+            "title": "Categories"
+        },
+        {
+            "location": "/rest/campaigns/categories/#create-a-category",
+            "text": "POST /categories     Name  Type  Description      name  string  Category name",
+            "title": "Create a category"
+        },
+        {
+            "location": "/rest/campaigns/categories/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/categories/1/\",\n  \"name\": \"test\",\n  \"messages\": [],\n  \"batches\": [],\n  \"_links\": {\n    \"opt_outs\": {\n      \"href\": \"/categories/1/opt_outs/\"\n    },\n    \"stats\": {\n      \"href\": \"/categories/1/stats/\"\n    },\n    \"messages_stats\": {\n      \"href\": \"/categories/1/messages_stats/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/categories/#retrieve-a-category",
+            "text": "GET /categories/:id",
+            "title": "Retrieve a category"
+        },
+        {
+            "location": "/rest/campaigns/categories/#list-your-categories",
+            "text": "Return your organization categories.  GET /categories",
+            "title": "List your categories"
+        },
+        {
+            "location": "/rest/campaigns/categories/#success-response_1",
+            "text": "Return a list of  categories .",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/categories/#modify-a-category",
+            "text": "Update a category.  PUT /categories/:id",
+            "title": "Modify a category"
+        },
+        {
+            "location": "/rest/campaigns/categories/#delete-a-category",
+            "text": "You can only delete a category that doesn't have any message .",
+            "title": "Delete a category"
+        },
+        {
+            "location": "/rest/campaigns/categories/#list-opt-outs-todo",
+            "text": "",
+            "title": "List opt-outs (todo)"
+        },
+        {
+            "location": "/rest/campaigns/categories/#retrieve-stats-todo",
+            "text": "",
+            "title": "Retrieve stats (todo)"
+        },
+        {
+            "location": "/rest/campaigns/categories/#retrieve-messages-stats-todo",
+            "text": "",
+            "title": "Retrieve messages stats (todo)"
+        },
+        {
+            "location": "/rest/campaigns/messages/",
+            "text": "Messages\n\n\nMessage are campaign main component.\n\n\nCreate a message\n\n\nPOST /messages\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nname\n\n\nstring\n\n\nMessage name\n\n\n\n\n\n\nsender_email\n\n\nstring\n\n\nSender email (must be a valid \nsending domain\n)\n\n\n\n\n\n\nsender_name\n\n\nstring\n\n\nSender name\n\n\n\n\n\n\nsubject\n\n\nstring\n\n\nMessage subject\n\n\n\n\n\n\nhtml\n\n\nstring\n\n\nHTML\n\n\n\n\n\n\ncategory\n\n\nstring\n\n\nMessage category URL\n\n\n\n\n\n\nproperties\n\n\nobject\n\n\nMessage properties\n\n\n\n\n\n\ntrack_open\n\n\nboolean\n\n\nEnable opens tracking\n\n\n\n\n\n\ntrack_clicks\n\n\nboolean\n\n\nEnable clicks tracking\n\n\n\n\n\n\nexternal_optout\n\n\nboolean\n\n\nEnable external opt-outs\n\n\n\n\n\n\ndetach_images\n\n\nboolean\n\n\nDetach message images\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/messages/1/\",\n  \"id\": 2,\n  \"name\": \"test\",\n  \"sender_email\": \"admin@example.com\",\n  \"sender_name\": \"Jan Doe\",\n  \"subject\": \"My Subject\",\n  \"html\": \"\nbody\nHello! \na href=\\\"UNSUBSCRIBE_URL\\\"\nUnsubscribe here!\n/a\n/body\n\",\n  \"status\": \"message_ok\",\n  \"category\": \"/categories/1/\",\n  \"recipient_count\": 0,\n  \"properties\": {},\n  \"creation_date\": \"2016-11-18T14:39:56.019101Z\",\n  \"send_date\": null,\n  \"completion_date\": null,\n  \"track_open\": false,\n  \"track_clicks\": false,\n  \"external_optout\": false,\n  \"detach_images\": false,\n  \"spam_score\": null,\n  \"spam_details\": null,\n  \"is_spam\": false,\n  \"msg_issue\": \"\",\n  \"_links\": {\n    \"preview_send\": {\n      \"href\": \"/messages/1/preview_send/\"\n    },\n    \"preview\": {\n      \"href\": \"/messages/1/preview/\"\n    },\n    \"preview.html\": {\n      \"href\": \"/messages/1/preview.html\"\n    },\n    \"preview.txt\": {\n      \"href\": \"/messages/1/preview.txt\"\n    },\n    \"recipients\": {\n      \"href\": \"/messages/1/recipients/\"\n    },\n    \"bounces\": {\n      \"href\": \"/messages/1/bounces/\"\n    },\n    \"opt_outs\": {\n      \"href\": \"/messages/1/opt_outs/\"\n    },\n    \"stats\": {\n      \"href\": \"/messages/1/stats/\"\n    },\n    \"attachments\": {\n      \"href\": \"/messages/1/attachments/\"\n    },\n    \"archive_url\": {\n      \"href\": \"/archive/twzaPZ5lTdaygV9GVZYpEg/\"\n    }\n  }\n}\n\n\n\nIn order to view your message only you can use \narchive_url\n URL.\n\n\nList messages\n\n\nList all messages you have access.\n\n\nGET /messages\n\n\nSuccess response\n\n\nA list of \nmessages\n.\n\n\nModify a message\n\n\nUpdate a message object.\n\n\nPUT /messages/:id\n\n\nSend a message\n\n\nEvery message with \nmessage_ok\n status can be updated to \nsending\n in order to trigger delivery.\n\n\nPUT /messages/:id\n\n\nDelete a message\n\n\n\n\nYou can only delete a message that doesn't have a final status.\n\n\n\n\nNon-final statuses\n: \nnew\n, \nmessage_ok\n, \nmessages_issues\n\n\nFinal statuses\n: \nsending\n, \nsent\n.\n\n\n\n\n\n\nDELETE /messages/:id\n\n\nRetrieve message preview\n\n\nGet a summary of your message.\n\n\nGET /messages/:id/preview\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\n{\n  \"recipients\": [\"contact@example.com\"],\n  \"excluded_recipients\": [\"already-spammed@example.com\"],\n  \"spam_score\": null,\n  \"is_spam\": false,\n  \"html\": \"[truncated]\",\n  \"plaintext\": \"[truncated]\"\n}\n\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nrecipients\n\n\narray\n\n\nList of accepted \nrecipients\n\n\n\n\n\n\nexcluded_recipients\n\n\narray\n\n\nList of refused \nrecipients\n (for example, opt-outs)\n\n\n\n\n\n\nspam_score\n\n\ninteger\n\n\nSpam score\n\n\n\n\n\n\nis_spam\n\n\nboolean\n\n\nIs considered as spam?\n\n\n\n\n\n\nhtml\n\n\nstring\n\n\nHTML rendered (same as \nhtml preview\n)\n\n\n\n\n\n\ntext\n\n\nstring\n\n\nText rendered (same as \ntext preview\n)\n\n\n\n\n\n\n\n\nRetrieve text preview\n\n\nGET /messages/:id/preview.txt\n\n\nRetrieve HTML preview\n\n\nGET /messages/:id/preview.html\n\n\nRetrieve recipients\n\n\nGET /messages/:id/recipients\n\n\nRetrieve bounces\n\n\nGET /messages/:id/bounces\n\n\nRetrieve opt-outs\n\n\nGET /messages/:id/opt_outs\n\n\nRetrieve stats\n\n\nRetrieve message stats.\n\n\nGET /messages/:id/stats\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\n{\n  \"optout\": {\n    \"abuse\": 0,\n    \"feedback-loop\": 0,\n    \"total\": 0,\n    \"web\": 0,\n    \"mail\": 0,\n    \"bounce\": 0\n  },\n  \"count\": {\n    \"total\": 0,\n    \"had_delay\": 0,\n    \"done\": 0,\n    \"in_transit\": 0\n  },\n  \"tracking\": {\n    \"opened\": 0,\n    \"open_median_time\": null,\n    \"clicked_total\": {},\n    \"viewed_in_browser\": 0,\n    \"clicked\": {\n      \"any\": 0\n    }\n  },\n  \"last_status\": {\n    \"sending\": 0,\n    \"dropped\": 0,\n    \"unknown\": 0,\n    \"ignored\": 0,\n    \"bounced\": 0,\n    \"queued\": 0,\n    \"delivered\": 0\n  },\n  \"timing\": {\n    \"delivery_total\": 0,\n    \"delivery_median\": 0\n  }\n}\n\n\n\nRetrieve attachments\n\n\nGET /messages/:id/attachments",
+            "title": "Messages"
+        },
+        {
+            "location": "/rest/campaigns/messages/#messages",
+            "text": "Message are campaign main component.",
+            "title": "Messages"
+        },
+        {
+            "location": "/rest/campaigns/messages/#create-a-message",
+            "text": "POST /messages     Name  Type  Description      name  string  Message name    sender_email  string  Sender email (must be a valid  sending domain )    sender_name  string  Sender name    subject  string  Message subject    html  string  HTML    category  string  Message category URL    properties  object  Message properties    track_open  boolean  Enable opens tracking    track_clicks  boolean  Enable clicks tracking    external_optout  boolean  Enable external opt-outs    detach_images  boolean  Detach message images",
+            "title": "Create a message"
+        },
+        {
+            "location": "/rest/campaigns/messages/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/messages/1/\",\n  \"id\": 2,\n  \"name\": \"test\",\n  \"sender_email\": \"admin@example.com\",\n  \"sender_name\": \"Jan Doe\",\n  \"subject\": \"My Subject\",\n  \"html\": \" body Hello!  a href=\\\"UNSUBSCRIBE_URL\\\" Unsubscribe here! /a /body \",\n  \"status\": \"message_ok\",\n  \"category\": \"/categories/1/\",\n  \"recipient_count\": 0,\n  \"properties\": {},\n  \"creation_date\": \"2016-11-18T14:39:56.019101Z\",\n  \"send_date\": null,\n  \"completion_date\": null,\n  \"track_open\": false,\n  \"track_clicks\": false,\n  \"external_optout\": false,\n  \"detach_images\": false,\n  \"spam_score\": null,\n  \"spam_details\": null,\n  \"is_spam\": false,\n  \"msg_issue\": \"\",\n  \"_links\": {\n    \"preview_send\": {\n      \"href\": \"/messages/1/preview_send/\"\n    },\n    \"preview\": {\n      \"href\": \"/messages/1/preview/\"\n    },\n    \"preview.html\": {\n      \"href\": \"/messages/1/preview.html\"\n    },\n    \"preview.txt\": {\n      \"href\": \"/messages/1/preview.txt\"\n    },\n    \"recipients\": {\n      \"href\": \"/messages/1/recipients/\"\n    },\n    \"bounces\": {\n      \"href\": \"/messages/1/bounces/\"\n    },\n    \"opt_outs\": {\n      \"href\": \"/messages/1/opt_outs/\"\n    },\n    \"stats\": {\n      \"href\": \"/messages/1/stats/\"\n    },\n    \"attachments\": {\n      \"href\": \"/messages/1/attachments/\"\n    },\n    \"archive_url\": {\n      \"href\": \"/archive/twzaPZ5lTdaygV9GVZYpEg/\"\n    }\n  }\n}  In order to view your message only you can use  archive_url  URL.",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/messages/#list-messages",
+            "text": "List all messages you have access.  GET /messages",
+            "title": "List messages"
+        },
+        {
+            "location": "/rest/campaigns/messages/#success-response_1",
+            "text": "A list of  messages .",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/messages/#modify-a-message",
+            "text": "Update a message object.  PUT /messages/:id",
+            "title": "Modify a message"
+        },
+        {
+            "location": "/rest/campaigns/messages/#send-a-message",
+            "text": "Every message with  message_ok  status can be updated to  sending  in order to trigger delivery.  PUT /messages/:id",
+            "title": "Send a message"
+        },
+        {
+            "location": "/rest/campaigns/messages/#delete-a-message",
+            "text": "You can only delete a message that doesn't have a final status.   Non-final statuses :  new ,  message_ok ,  messages_issues  Final statuses :  sending ,  sent .    DELETE /messages/:id",
+            "title": "Delete a message"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-message-preview",
+            "text": "Get a summary of your message.  GET /messages/:id/preview",
+            "title": "Retrieve message preview"
+        },
+        {
+            "location": "/rest/campaigns/messages/#success-response_2",
+            "text": "HTTP 200 OK  {\n  \"recipients\": [\"contact@example.com\"],\n  \"excluded_recipients\": [\"already-spammed@example.com\"],\n  \"spam_score\": null,\n  \"is_spam\": false,\n  \"html\": \"[truncated]\",\n  \"plaintext\": \"[truncated]\"\n}     Name  Type  Description      recipients  array  List of accepted  recipients    excluded_recipients  array  List of refused  recipients  (for example, opt-outs)    spam_score  integer  Spam score    is_spam  boolean  Is considered as spam?    html  string  HTML rendered (same as  html preview )    text  string  Text rendered (same as  text preview )",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-text-preview",
+            "text": "GET /messages/:id/preview.txt",
+            "title": "Retrieve text preview"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-html-preview",
+            "text": "GET /messages/:id/preview.html",
+            "title": "Retrieve HTML preview"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-recipients",
+            "text": "GET /messages/:id/recipients",
+            "title": "Retrieve recipients"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-bounces",
+            "text": "GET /messages/:id/bounces",
+            "title": "Retrieve bounces"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-opt-outs",
+            "text": "GET /messages/:id/opt_outs",
+            "title": "Retrieve opt-outs"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-stats",
+            "text": "Retrieve message stats.  GET /messages/:id/stats",
+            "title": "Retrieve stats"
+        },
+        {
+            "location": "/rest/campaigns/messages/#success-response_3",
+            "text": "HTTP 200 OK  {\n  \"optout\": {\n    \"abuse\": 0,\n    \"feedback-loop\": 0,\n    \"total\": 0,\n    \"web\": 0,\n    \"mail\": 0,\n    \"bounce\": 0\n  },\n  \"count\": {\n    \"total\": 0,\n    \"had_delay\": 0,\n    \"done\": 0,\n    \"in_transit\": 0\n  },\n  \"tracking\": {\n    \"opened\": 0,\n    \"open_median_time\": null,\n    \"clicked_total\": {},\n    \"viewed_in_browser\": 0,\n    \"clicked\": {\n      \"any\": 0\n    }\n  },\n  \"last_status\": {\n    \"sending\": 0,\n    \"dropped\": 0,\n    \"unknown\": 0,\n    \"ignored\": 0,\n    \"bounced\": 0,\n    \"queued\": 0,\n    \"delivered\": 0\n  },\n  \"timing\": {\n    \"delivery_total\": 0,\n    \"delivery_median\": 0\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/messages/#retrieve-attachments",
+            "text": "GET /messages/:id/attachments",
+            "title": "Retrieve attachments"
+        },
+        {
+            "location": "/rest/campaigns/attachments/",
+            "text": "Attachments\n\n\nYou message attachments to add files to your messages.\n\n\nAdd an attachment\n\n\nAdd an attachment to a message.\n\n\n\n\nYour organization need to be able to add attachments.\nThis can be change in Django administration console.\n\n\n\n\nPOST /attachments\n\n\nThis request must be done in HTML form (not JSON body).\n\n\n\n\n\n\n\n\nName\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nmessage\n\n\nMessage URL\n\n\n\n\n\n\nfile\n\n\nFile object\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/attachments/1/\",\n  \"message\": \"/messages/1/\",\n  \"filename\": \"example.png\",\n  \"size\": 20029,\n  \"size_in_mail\": 26708,\n  \"_links\": {\n    \"download\": {\n      \"href\": \"/attachments/1/download/\"\n    },\n    \"content\": {\n      \"href\": \"/attachments/1/content/\"\n    }\n  }\n}\n\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nurl\n\n\nstring\n\n\nAttachment URL\n\n\n\n\n\n\nmessage\n\n\nstring\n\n\nMessage URL\n\n\n\n\n\n\nfilename\n\n\nstring\n\n\nUploaded filename\n\n\n\n\n\n\nsize\n\n\ninteger\n\n\nUploaded file size\n\n\n\n\n\n\nsize_in_mail\n\n\ninteger\n\n\nFile size in mail\n\n\n\n\n\n\n\n\nList attachments\n\n\nGET /attachments\n\n\nReturn a list of \nattachments\n.\n\n\nModify and attachment\n\n\nUpdate a message attachment.\n\n\nPUT /attachments/:id\n\n\nDelete an attachment\n\n\nDELETE /attachments/:id",
+            "title": "Attachments"
+        },
+        {
+            "location": "/rest/campaigns/attachments/#attachments",
+            "text": "You message attachments to add files to your messages.",
+            "title": "Attachments"
+        },
+        {
+            "location": "/rest/campaigns/attachments/#add-an-attachment",
+            "text": "Add an attachment to a message.   Your organization need to be able to add attachments.\nThis can be change in Django administration console.   POST /attachments  This request must be done in HTML form (not JSON body).     Name  Description      message  Message URL    file  File object",
+            "title": "Add an attachment"
+        },
+        {
+            "location": "/rest/campaigns/attachments/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/attachments/1/\",\n  \"message\": \"/messages/1/\",\n  \"filename\": \"example.png\",\n  \"size\": 20029,\n  \"size_in_mail\": 26708,\n  \"_links\": {\n    \"download\": {\n      \"href\": \"/attachments/1/download/\"\n    },\n    \"content\": {\n      \"href\": \"/attachments/1/content/\"\n    }\n  }\n}     Name  Type  Description      url  string  Attachment URL    message  string  Message URL    filename  string  Uploaded filename    size  integer  Uploaded file size    size_in_mail  integer  File size in mail",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/attachments/#list-attachments",
+            "text": "GET /attachments  Return a list of  attachments .",
+            "title": "List attachments"
+        },
+        {
+            "location": "/rest/campaigns/attachments/#modify-and-attachment",
+            "text": "Update a message attachment.  PUT /attachments/:id",
+            "title": "Modify and attachment"
+        },
+        {
+            "location": "/rest/campaigns/attachments/#delete-an-attachment",
+            "text": "DELETE /attachments/:id",
+            "title": "Delete an attachment"
+        },
+        {
+            "location": "/rest/campaigns/recipients/",
+            "text": "Recipients\n\n\nEach recipients must be attached to a \nmessage\n, have an address and will have a status tracking.\n\n\nCreate a recipient\n\n\nPOST /recipients\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nto\n\n\nstring\n\n\nEmail address\n\n\n\n\n\n\nmessage\n\n\nstring\n\n\nMessage URL\n\n\n\n\n\n\nsource_type\n\n\nstring\n\n\nFree to use field\n\n\n\n\n\n\nsource_ref\n\n\nstring\n\n\nFree to use field\n\n\n\n\n\n\nproperties\n\n\nobject\n\n\nFree to use field\n\n\n\n\n\n\n\n\nSuccess response\n\n\nHTTP 201 Created\n\n\n{\n  \"url\": \"/recipients/1/\",\n  \"to\": \"admin@example.com\",\n  \"date\": \"2016-06-13T08:43:22Z\",\n  \"message\": \"/messages/1/\",\n  \"delivery_status\": \"unknown\",\n  \"source_type\": \"\",\n  \"source_ref\": \"\",\n  \"properties\": {},\n  \"_links\": {\n    \"optout\": {\n      \"href\": \"/recipients/1/optout/\"\n    },\n    \"status_log\": {\n      \"href\": \"/recipients/1/status_log/\"\n    }\n  }\n}\n\n\n\nRetrieve a recipient\n\n\nGET /recipients/:id\n\n\nList recipients\n\n\nGET /recipients\n\n\nSuccess response\n\n\nReturn a list of \nrecipients\n.\n\n\n\n\nYou'll probably use \nGET /messages/:id/recipients\n instead\nof listing all recipients of all messages.\n\n\n\n\nModify a recipient\n\n\nPUT /recipients/:id\n\n\n\n\nYou can only delete a recipient that doesn't have a final state.\n\n\n\n\nDelete a recipient\n\n\nDELETE /recipients/:id\n\n\n\n\nYou can only delete a recipient that doesn't have a final state.\n\n\n\n\nRetrieve recipient statuses\n\n\nReturn every recipient statuses.\n\n\nGET /recipients/:id/status_log\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\n[\n  {\n    \"status\": \"bounced\",\n    \"creation_date\": \"2016-11-16T08:56:14Z\",\n    \"raw_msg\": \"200: Ok\"\n  },\n  {\n    \"status\": \"sending\",\n    \"creation_date\": \"2016-11-16T08:59:01.847058Z\",\n    \"raw_msg\": \"\"\n  },\n  {\n    \"status\": \"delayed\",\n    \"creation_date\": \"2016-11-16T08:51:42.685499Z\",\n    \"raw_msg\": \"451 Connection failed\"\n  },\n  {\n    \"status\": \"sending\",\n    \"creation_date\": \"2016-11-16T08:51:36.420260Z\",\n    \"raw_msg\": \"\"\n  },\n  {\n    \"status\": \"queued\",\n    \"creation_date\": \"2016-11-16T08:42:08.542326Z\",\n    \"raw_msg\": \"Enqueued in celery\"\n  },\n  {\n    \"status\": \"unknown\",\n    \"creation_date\": \"2016-11-16T08:42:04.772406Z\",\n    \"raw_msg\": \"Mail passed to infrastructure\"\n  }\n]\n\n\n\nOpt-out a recipient\n\n\nGenerate an opt-out for a recipient.\n\n\nPOST /recipients/:id/optout\n\n\nEmpty body.\n\n\nSuccess response\n\n\nHTTP 200 OK\n\n\nEmpty body.",
+            "title": "Recipients"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#recipients",
+            "text": "Each recipients must be attached to a  message , have an address and will have a status tracking.",
+            "title": "Recipients"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#create-a-recipient",
+            "text": "POST /recipients     Name  Type  Description      to  string  Email address    message  string  Message URL    source_type  string  Free to use field    source_ref  string  Free to use field    properties  object  Free to use field",
+            "title": "Create a recipient"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#success-response",
+            "text": "HTTP 201 Created  {\n  \"url\": \"/recipients/1/\",\n  \"to\": \"admin@example.com\",\n  \"date\": \"2016-06-13T08:43:22Z\",\n  \"message\": \"/messages/1/\",\n  \"delivery_status\": \"unknown\",\n  \"source_type\": \"\",\n  \"source_ref\": \"\",\n  \"properties\": {},\n  \"_links\": {\n    \"optout\": {\n      \"href\": \"/recipients/1/optout/\"\n    },\n    \"status_log\": {\n      \"href\": \"/recipients/1/status_log/\"\n    }\n  }\n}",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#retrieve-a-recipient",
+            "text": "GET /recipients/:id",
+            "title": "Retrieve a recipient"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#list-recipients",
+            "text": "GET /recipients",
+            "title": "List recipients"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#success-response_1",
+            "text": "Return a list of  recipients .   You'll probably use  GET /messages/:id/recipients  instead\nof listing all recipients of all messages.",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#modify-a-recipient",
+            "text": "PUT /recipients/:id   You can only delete a recipient that doesn't have a final state.",
+            "title": "Modify a recipient"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#delete-a-recipient",
+            "text": "DELETE /recipients/:id   You can only delete a recipient that doesn't have a final state.",
+            "title": "Delete a recipient"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#retrieve-recipient-statuses",
+            "text": "Return every recipient statuses.  GET /recipients/:id/status_log",
+            "title": "Retrieve recipient statuses"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#success-response_2",
+            "text": "HTTP 200 OK  [\n  {\n    \"status\": \"bounced\",\n    \"creation_date\": \"2016-11-16T08:56:14Z\",\n    \"raw_msg\": \"200: Ok\"\n  },\n  {\n    \"status\": \"sending\",\n    \"creation_date\": \"2016-11-16T08:59:01.847058Z\",\n    \"raw_msg\": \"\"\n  },\n  {\n    \"status\": \"delayed\",\n    \"creation_date\": \"2016-11-16T08:51:42.685499Z\",\n    \"raw_msg\": \"451 Connection failed\"\n  },\n  {\n    \"status\": \"sending\",\n    \"creation_date\": \"2016-11-16T08:51:36.420260Z\",\n    \"raw_msg\": \"\"\n  },\n  {\n    \"status\": \"queued\",\n    \"creation_date\": \"2016-11-16T08:42:08.542326Z\",\n    \"raw_msg\": \"Enqueued in celery\"\n  },\n  {\n    \"status\": \"unknown\",\n    \"creation_date\": \"2016-11-16T08:42:04.772406Z\",\n    \"raw_msg\": \"Mail passed to infrastructure\"\n  }\n]",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#opt-out-a-recipient",
+            "text": "Generate an opt-out for a recipient.  POST /recipients/:id/optout  Empty body.",
+            "title": "Opt-out a recipient"
+        },
+        {
+            "location": "/rest/campaigns/recipients/#success-response_3",
+            "text": "HTTP 200 OK  Empty body.",
+            "title": "Success response"
+        },
+        {
+            "location": "/rest/transactional/overview/",
+            "text": "Overview\n\n\nThis API is \nread-only\n. Its only use is to retrieve data created via SMTP edge.",
+            "title": "Overview"
+        },
+        {
+            "location": "/rest/transactional/overview/#overview",
+            "text": "This API is  read-only . Its only use is to retrieve data created via SMTP edge.",
+            "title": "Overview"
+        },
+        {
+            "location": "/rest/transactional/categories/",
+            "text": "Categories\n\n\nCategories are shared with \ncampaigns categories\n.",
+            "title": "Categories"
+        },
+        {
+            "location": "/rest/transactional/categories/#categories",
+            "text": "Categories are shared with  campaigns categories .",
+            "title": "Categories"
+        },
+        {
+            "location": "/rest/transactional/mails/",
+            "text": "Mails (todo)",
+            "title": "Mails"
+        },
+        {
+            "location": "/rest/transactional/mails/#mails-todo",
+            "text": "",
+            "title": "Mails (todo)"
+        },
+        {
+            "location": "/rest/transactional/batches/",
+            "text": "Batches (todo)",
+            "title": "Batches"
+        },
+        {
+            "location": "/rest/transactional/batches/#batches-todo",
+            "text": "",
+            "title": "Batches (todo)"
+        }
+    ]
+}
