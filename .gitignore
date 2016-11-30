@@ -16,3 +16,4 @@ __pycache__
 src/munch/media/**
 docs/tmp.md
 docs/_build
+docs/site
