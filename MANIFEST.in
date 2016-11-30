@@ -1,4 +1,4 @@
-include setup.py README.rst
+include setup.py README.rst LICENSE
 recursive-include src/munch *.txt
 recursive-include src/munch *.html
 recursive-include src/munch/assets *

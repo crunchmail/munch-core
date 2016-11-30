@@ -12,5 +12,5 @@ __version__ = "0.1.0"
 __author__ = u"Crunchmail"
 __email__ = "dev@crunchmail.com"
 
-__license__ = "Not specified"
+__license__ = "GNU AGPLv3"
 __copyright__ = "Copyright 2016 %s" % __author__

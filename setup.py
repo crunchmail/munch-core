@@ -69,6 +69,7 @@ setup(
     url=about["__uri__"],
     install_requires=requires,
     dependency_links=dependency_links,
+    license=about["__license__"],
     entry_points={
         'console_scripts': [
             'munch = munch.runner:main']
@@ -92,5 +93,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',  # noqa
     ]
 )
