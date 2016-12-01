@@ -3,7 +3,7 @@ __all__ = [
     "__email__", "__license__", "__copyright__",
 ]
 
-__title__ = "munch"
+__title__ = "munch-core"
 __summary__ = "Munch is an emailing platform."
 __uri__ = "https://github.com/crunchmail/munch-core"
 
