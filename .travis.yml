@@ -1,22 +1,32 @@
 language: python
 python:
-  - "3.4"
+  - '3.4'
 services:
   - redis-server
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 env:
   DJANGO_SETTINGS_MODULE: munch.settings.test
   TEST_PG_USER: postgres
-  TEST_PG_PASS: ""
-  TEST_PG_NAME: "munch"
-  TEST_PG_PORT: "5432"
-  TEST_REDIS_PORT: "6379"
+  TEST_PG_PASS: ''
+  TEST_PG_NAME: munch
+  TEST_PG_PORT: '5432'
+  TEST_REDIS_PORT: '6379'
 before_install:
   - export PYTHONUSERBASE=/cache
   - export PYTHONPATH=/cache/lib/python3.4/site-packages:$PYTHONPATH
   - export PATH=/cache/bin:$PATH
-install: "pip install --process-dependency-links -e .[tests]"
+install: pip install --process-dependency-links -e .[tests]
 before_script:
   - flake8
 script: munch django test munch
+deploy:
+  provider: pypi
+  user: oasiswork-devs
+  password:
+    secure: aYRsve/TaZmSxvo/n01ktQWqtVg6ZL+OatIc7Kqyeb8fLuPeRpQmhZ9foUXdLSPUM/HlvnVl3+Y6y3Eg/v1Ybpw4eend1+xeN5kdjo3YR8lMKPrjAkkryYOhV90SKoRjlJdgJVDgAmVFLfopRvtwLULqC/wP81VsBGbeFXDbPFXcVFCxFsvrsf8p7yH3MyasofyMY1SV9YuolYZTd95CPgAwN0ov9Nng/RhSDU588WJev7deFzGIDYowur7YOVuG0bJYkuHDk1kGyBJiDcn5Ib2ZGZ3098nawMottfUYKik9rWPATaapuOp8rmlczBqBFAXl9tamBxqh9ns+EFHEQ0Gii6aLz9OW+jp21UJxHHvPB1MrOfGnDRGwN6P4RxSIw2QDpqMkJ4T8QzXfyQZ+v0lpflQShTj9FYBMQASpzWTCoX4MVpI4eGOGMjG23Bhsg/SWxEu6p8M3VXz1VOkjPbDsHZa1Dw6w+tvBoCPBU2XRf+L4vgZAELaU8Lzw7Nc89Lj1ei6optnhkGJ0CtzdLy4PV+3bMgP6nA4gZpXcan8IsAgGPzb0uOtSWGPs00oe9XY5TBvLIJeS2XzxAzz1MqbW5AnYf4MVYS6CwVNo5EW9ZkvoQAIkgu8TS7CM9drFcn8SjsJW2XU1tKPn5YqUNENOjTBIMcoK8EpFVgjifeI=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: crunchmail/munch-core
+    branch: master
