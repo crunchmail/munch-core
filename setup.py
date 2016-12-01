@@ -14,7 +14,10 @@ with open(os.path.join(base_dir, "src", "munch", "__about__.py")) as f:
 with open(os.path.join(base_dir, "README.rst")) as f:
     long_description = f.read()
 
-dependency_links = []
+dependency_links = [
+    # TODO: Remove dependency link when munch-mailsend will be published
+   'git+https://github.com/crunchmail/munch-mailsend.git@master#egg=munch-mailsend-0.1.0']  # noqa
+
 
 requires = [
     # Project
