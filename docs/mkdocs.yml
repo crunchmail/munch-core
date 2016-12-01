@@ -1,5 +1,5 @@
 site_name: Munch
-theme: simplex
+theme: flatly
 repo_url: https://github.com/crunchmail/munch
 site_url: https://github.com/crunchmail/munch
 dev_addr: 127.0.0.1:8002
