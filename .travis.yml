@@ -12,6 +12,9 @@ env:
   TEST_PG_NAME: munch
   TEST_PG_PORT: '5432'
   TEST_REDIS_PORT: '6379'
+branch:
+  except:
+    - gh-pages
 before_install:
   - export PYTHONUSERBASE=/cache
   - export PYTHONPATH=/cache/lib/python3.4/site-packages:$PYTHONPATH
