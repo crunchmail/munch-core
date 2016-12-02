@@ -1,6 +1,9 @@
 Munch
 =====
 
+[![Build Status](https://travis-ci.org/crunchmail/munch-core.svg?branch=master)](https://travis-ci.org/crunchmail/munch-core
+)
+
 Munch is mostly a REST API which allow you to manage your email campaigns and send it to many recipients.
 
 It allow you to track your recipients opens and clicks and to manage campaigns unsubscribes, bounces, opt-outs, sending domains checking and more.
