@@ -1,4 +1,3 @@
-# flake8: noqa
 import os
 import sys
 import logging
@@ -7,6 +6,8 @@ from ssl import PROTOCOL_TLSv1_2  # TODO: Switch to PROTOCOL_TLS with Py3.5
 from multiprocessing import cpu_count
 
 import click
+
+from ...core.utils import available_worker_types
 
 log = logging.getLogger('munch.apps.transactional')
 
@@ -37,7 +38,6 @@ def smtp():
     django.setup()
 
     import time
-    import logging
 
     from django.conf import settings
 
@@ -155,8 +155,8 @@ def smtp():
     '--autoreload', is_flag=True,
     default=False, help='Enable autoreloading.')
 @click.option(
-    '--worker-type', default='all',
-    type=click.Choice(['all', 'core', 'status', 'router', 'mx', 'gc']),
+    '--worker-type', '-t', default=['all'], multiple=True,
+    type=click.Choice(available_worker_types),
     help=('Define which kind of task worker will consume.'),
     show_default=True)
 @click.option(
@@ -173,8 +173,8 @@ def worker(**options):
             'settings file to spawn workers.')
 
     from munch.core.celery import app
-    worker_type = options.pop('worker_type')
-    os.environ['WORKER_TYPE'] = worker_type.upper()
+    os.environ['WORKER_TYPE'] = ','.join(options.pop('worker_type')).lower()
+    print(os.environ['WORKER_TYPE'])
     pool_cls = options.pop('pool')
     worker = app.Worker(
         pool_cls=pool_cls, queues=settings.CELERY_DEFAULT_QUEUE, **options)

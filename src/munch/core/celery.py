@@ -9,7 +9,7 @@ from kombu import Queue
 
 from django.conf import settings
 
-from munch.core.utils import get_worker_type
+from munch.core.utils import get_worker_types
 
 log = logging.getLogger('munch')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'munch.settings')
@@ -145,7 +145,7 @@ def register_tasks():
 @celeryd_after_setup.connect
 @catch_exception
 def configure_worker(instance, **kwargs):
-    if get_worker_type() in ['gc', 'all']:
+    if any([t in get_worker_types() for t in ['gc', 'all']]):
         from .mail.tasks import purge_raw_mail  # noqa
         sys.stdout.write(
             '[core-app] Registering worker as GARBAGE COLLECTOR...')

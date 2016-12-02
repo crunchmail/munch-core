@@ -90,8 +90,9 @@ def pretty_json_as_html(data, sort_keys=True):
     return mark_safe(style + response)
 
 
-def get_worker_type():
-    return os.environ.get('WORKER_TYPE', 'all').lower()
+get_worker_types = lambda: [v.lower() for v in os.environ.get(
+    'WORKER_TYPE', 'all').split(',')]
+available_worker_types = ['all', 'core', 'status', 'gc']
 
 
 def monkey_patch_slimta_exception():
