@@ -53,4 +53,9 @@ reset_app: .assert-no-production reset_mq reset_cache reset_db load_data
 serve_docs: .assert-no-production
 	cd docs && mkdocs serve
 
+release:
+	@echo "Releasing \"`python -c 'from munch import __version__ as v;print(v)'`\" on Pypi in 5 seconds..."
+	@sleep 5
+	python setup.py sdist bdist_wheel upload
+
 .PHONY: init_dev reset_app serve_docs
