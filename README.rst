@@ -1,8 +1,8 @@
 Munch
 =====
 
-[![Build Status](https://travis-ci.org/crunchmail/munch-core.svg?branch=master)](https://travis-ci.org/crunchmail/munch-core
-)
+.. image:: https://travis-ci.org/crunchmail/munch-core.svg?branch=master
+    :target: https://travis-ci.org/crunchmail/munch-core
 
 Munch is mostly a REST API which allow you to manage your email campaigns and send it to many recipients.
 
