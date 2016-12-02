@@ -53,7 +53,7 @@ requires = [
     # Fixtures
     'PyYAML==3.11',
     # Email backend
-    'munch-mailsend==0.1.0',
+    'munch-mailsend==0.1.1',
 ]
 
 
