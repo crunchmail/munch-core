@@ -1,6 +1,9 @@
 include setup.py README.rst LICENSE
 recursive-include src/munch *.txt
 recursive-include src/munch *.html
+recursive-include src/munch *.jinja2
 recursive-include src/munch/assets *
 recursive-include src/munch/locale *
+exclude src/munch/settings/local.py
+exclude src/munch/settings/production.py
 global-exclude *~
