@@ -28,7 +28,7 @@ class DoubleOptIn(PolicyBackend):
         message = EmailMessage(
             subject='Votre inscription',
             body=render_to_string(
-                'contacts/double_opt_in_confirmation.email',
+                'contacts/double_opt_in_confirmation.txt',
                 {'contact': item, 'confirmation_link': confirmation_link}),
             to=(item.address, ),
             from_email='{} <{}>'.format(
@@ -50,7 +50,7 @@ class BounceCheck(PolicyBackend):
             message = EmailMessage(
                 subject='Votre inscription',
                 body=render_to_string(
-                    'contacts/bounce_check_confirmation.email',
+                    'contacts/bounce_check_confirmation.txt',
                     {'contact': item}),
                 to=(item.address, ),
                 from_email='{} <{}>'.format(
