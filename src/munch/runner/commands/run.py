@@ -7,8 +7,6 @@ from multiprocessing import cpu_count
 
 import click
 
-from ...core.utils import available_worker_types
-
 log = logging.getLogger('munch.apps.transactional')
 
 
@@ -156,7 +154,6 @@ def smtp():
     default=False, help='Enable autoreloading.')
 @click.option(
     '--worker-type', '-t', default=['all'], multiple=True,
-    type=click.Choice(available_worker_types),
     help=('Define which kind of task worker will consume.'),
     show_default=True)
 @click.option(
