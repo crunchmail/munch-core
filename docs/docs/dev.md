@@ -9,7 +9,7 @@ This documentation explain how to install a dev or test setup of Munch.
 
 ## Install
 
-    git clone https://github.com/oasiswork/munch.git
+    git clone https://github.com/crunchmail/munch-core.git
     cd munch
     pip install -U virtualenv
     virtualenv -p python3.4 .venv
