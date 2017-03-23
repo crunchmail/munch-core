@@ -17,7 +17,6 @@ def register_tasks():
 @celeryd_after_setup.connect
 @catch_exception
 def configure_worker(instance, **kwargs):
-    print('*****', get_worker_types())
     if any([t in get_worker_types() for t in ['core', 'all']]):
         # from .tasks import ...  # noqa
         sys.stdout.write('[users-app] Registering worker as CORE...')

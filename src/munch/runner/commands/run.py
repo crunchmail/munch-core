@@ -171,7 +171,6 @@ def worker(**options):
 
     from munch.core.celery import app
     os.environ['WORKER_TYPE'] = ','.join(options.pop('worker_type')).lower()
-    print(os.environ['WORKER_TYPE'])
     pool_cls = options.pop('pool')
     worker = app.Worker(
         pool_cls=pool_cls, queues=settings.CELERY_DEFAULT_QUEUE, **options)
