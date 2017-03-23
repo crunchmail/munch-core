@@ -233,7 +233,6 @@ def backmuncher():
             settings.BACKMUNCHER.get('SMTP_BIND_PORT')),
         Queue(BlackholeRelay()),
         hostname=settings.BACKMUNCHER.get('EDGE_EHLO_AS', None),
-        tls=False,
     )
 
     log.info('Listening on {}:{}'.format(
