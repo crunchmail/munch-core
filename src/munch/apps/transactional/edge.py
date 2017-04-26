@@ -1,5 +1,6 @@
 import logging
 
+from django.conf import settings
 from django.core.signals import request_started
 from django.core.signals import request_finished
 from slimta.edge.smtp import SmtpEdge
@@ -17,8 +18,9 @@ log = logging.getLogger(__name__)
 
 class EdgeValidators(SmtpValidators):
     def handle_auth(self, reply, creds):
-        # Force authentication over TLS
-        if not self.session.security:
+        tls_settings = settings.TRANSACTIONAL.get('SMTP_SMARTHOST_TLS')
+        if tls_settings is not None and not self.session.security:
+            # Force authentication over TLS
             reply.code = '530'
             reply.message = '5.7.0 Must issue a STARTTLS command first'
             return
@@ -30,7 +32,7 @@ class EdgeValidators(SmtpValidators):
         if application:
             authenticated = creds.check_secret(application.secret)
             if authenticated:
-                log.info('Successfull login from "{}"'.format(creds.authcid))
+                log.info('Successfull login from "{}"'.format(application.username, application.identifier))
 
         if not authenticated:
             reply.code = '535'
