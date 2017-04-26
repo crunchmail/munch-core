@@ -2,7 +2,7 @@ import os
 import sys
 import logging
 from ssl import SSLContext
-from ssl import PROTOCOL_TLSv1_2
+from ssl import PROTOCOL_SSLv23 # TODO: Switch to PROTOCOL_TLS with Py3.5.3+
 from multiprocessing import cpu_count
 
 import click
@@ -71,7 +71,7 @@ def smtp():
                 if not os.access(path, os.R_OK):
                     raise Exception(
                         '{} is not readable or inexistant.'.format(path))
-        ssl_context = SSLContext(PROTOCOL_TLSv1_2)
+        ssl_context = SSLContext(PROTOCOL_SSLv23)
         ssl_context.load_cert_chain(
             tls_settings.get('certfile'), keyfile=tls_settings.get('keyfile'))
     else:
