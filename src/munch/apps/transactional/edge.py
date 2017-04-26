@@ -92,4 +92,7 @@ class ProxyProtocolTransactionalSmtpEdge(
             log.debug(
                 'Successfully retrieve ProxyProto address: {}:{}'.format(
                     address[0], address[1]))
-        super(TransactionalSmtpEdge, self).handle(socket, address)
+        request_started.send(
+                sender='transactional-edge-{}-{}'.format(address[0], address[1]))
+        # Don't call super() to work around python MRO
+        TransactionalSmtpEdge.handle(self, socket, address)
