@@ -2,7 +2,7 @@ import os
 import sys
 import logging
 from ssl import SSLContext
-from ssl import PROTOCOL_TLSv1_2  # TODO: Switch to PROTOCOL_TLS with Py3.5
+from ssl import PROTOCOL_TLSv1_2
 from multiprocessing import cpu_count
 
 import click
@@ -19,7 +19,10 @@ def run():
 def smtp():
     "Run smtp smarthost for transactional service."
     from gevent import monkey
-    monkey.patch_all()
+    # Do not patch threads, it may lead to Django DatabaseWrapper being
+    # shared between threads.
+    # See: https://code.djangoproject.com/ticket/17998#comment:6
+    monkey.patch_all(thread=False)
 
     import os
     import sys
