@@ -80,7 +80,8 @@ setup(
             'bumpversion==0.5.3',
             'docker-compose==1.8.0',
             'mkdocs==0.16.0',
-            'mkdocs-bootswatch==0.4.0'],
+            'mkdocs-bootswatch==0.4.0',
+            'django-cors-headers==2.0.2'],
         'tests': [
             'flake8==3.2.0',
             'libfaketime==0.4.2',
