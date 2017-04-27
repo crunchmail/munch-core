@@ -278,11 +278,13 @@ TRANSACTIONAL = {
         'munch.apps.transactional.policies.queue.headers.Remove',
         'munch.apps.transactional.policies.queue.recipients.Clean',
         'munch.apps.transactional.policies.queue.identifier.Add',
+        'munch.apps.transactional.policies.queue.exec.Apply',
         'munch.apps.transactional.policies.queue.store_mail.Store'],
     # Status logging
     'STATUS_WEBHOOK_RETRIES': 20,
     'STATUS_WEBHOOK_RETRY_INTERVAL': 180,
     'EXEC_QUEUE_POLICIES': [],
+    'EXEC_QUEUE_POLICIES_CONTEXT_BUILTINS': [],
     # Filters applied to add custom headers to emails for each recipient
     # (order matters).
     'HEADERS_FILTERS': [
