@@ -27,7 +27,7 @@ class Apply(QueuePolicy):
                         'print': print
                     }}
                     for mod in settings.TRANSACTIONAL.get('EXEC_QUEUE_POLICIES_CONTEXT_BUILTINS'):
-                        allowed_context['__builtins__'][m] = __import__(m)
+                        allowed_context['__builtins__'][mod] = __import__(mod)
 
                     try:
                         exec(module.read(), allowed_context, ephemeral_context)
