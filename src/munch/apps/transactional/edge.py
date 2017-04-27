@@ -39,7 +39,7 @@ class EdgeValidators(SmtpValidators):
         if application:
             authenticated = creds.check_secret(application.secret)
             if authenticated:
-                log.info('[{}] Successfull login from "{}"'.format(
+                log.info('[{}] Successfull login from "{}:{}"'.format(
                     self.cid, application.author.identifier,
                     application.identifier))
 
