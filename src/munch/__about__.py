@@ -7,7 +7,7 @@ __title__ = "munch-core"
 __summary__ = "Munch is an emailing platform."
 __uri__ = "https://github.com/crunchmail/munch-core"
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 __author__ = u"Crunchmail"
 __email__ = "dev@crunchmail.com"
