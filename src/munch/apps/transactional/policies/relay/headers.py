@@ -21,12 +21,19 @@ class RewriteReturnPath(RelayPolicy):
             envelope.sender = return_path_parser.new(
                 envelope.headers[settings.TRANSACTIONAL[
                     'X_MESSAGE_ID_HEADER']])
-        # If there is no X-HTTP-Return-Path
+        elif settings.TRANSACTIONAL['X_SMTP_DSN_RETURN_PATH_HEADER'] in \
+                envelope.headers:
+            # Rewrite it
+            envelope.sender = return_path_parser.new(
+                envelope.headers[settings.TRANSACTIONAL[
+                    'X_MESSAGE_ID_HEADER']])
+        # If there is no X-HTTP-Return-Path or X-SMTP-Return-Path
         else:
             log.info(
-                '[{}] Keeping original Return-Path ({}) because there is no '
-                '"{}" (then DSN will be sent to original sender).'.format(
+                '[{}] Keeping original Return-Path ({}) because there are no '
+                '"{}" or "{}" headers (then DSN will be sent to original sender).'.format(
                     envelope.headers[settings.TRANSACTIONAL[
                         'X_MESSAGE_ID_HEADER']],
                     envelope.sender,
-                    settings.TRANSACTIONAL['X_HTTP_DSN_RETURN_PATH_HEADER']))
+                    settings.TRANSACTIONAL['X_HTTP_DSN_RETURN_PATH_HEADER'],
+                    settings.TRANSACTIONAL['X_SMTP_DSN_RETURN_PATH_HEADER']))
